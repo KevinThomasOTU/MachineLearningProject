@@ -4,7 +4,8 @@ data:
   label_col: Product
   text_col: Consumer complaint narrative
   min_class_count: 200     # M2: >=200 rows so val/test (15% each) hold approx 30 per class
-  sample_size: 100000      # M2: group-aware stratified cap for k-NN compute; null = use all
+  one_row_per_group: true  # M2: templated letters are ~50% of rows; keep one row per duplicate group
+  sample_size: null        # M2: ~97.6k distinct groups already fit compute; set a number to cap
 dedupe:
   block_on: [date_received, state, zip, issue]
   prefix_chars: 200        # same (date, state, zip, issue) block + same 200-char normalised prefix
