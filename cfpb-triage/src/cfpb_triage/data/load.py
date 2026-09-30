@@ -23,7 +23,6 @@ RAW_COLUMNS = [
 
 
 def load_config(path: str | Path = "configs/config.yaml") -> dict:
-    """Read the YAML config. Relative paths are resolved against the repo root."""
     path = Path(path)
     if not path.is_absolute():
         path = ROOT / path
@@ -32,15 +31,12 @@ def load_config(path: str | Path = "configs/config.yaml") -> dict:
 
 
 def resolve(path: str | Path) -> Path:
-    """Resolve a config path (e.g. data.raw_path) against the repo root."""
     path = Path(path)
     return path if path.is_absolute() else ROOT / path
 
 
 def load_raw(path: str | Path, usecols: list[str] | None = None) -> pd.DataFrame:
-    """Load the raw CFPB complaints CSV.
-
-    Reads only `usecols` (default: RAW_COLUMNS) as strings so ZIP codes and
+    """ Reads only `usecols` (default: RAW_COLUMNS) as strings so ZIP codes and
     IDs keep leading zeros. Raises FileNotFoundError / ValueError with a
     readable message if the file or a required column is missing.
     """
