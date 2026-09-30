@@ -7,3 +7,4 @@ data/interim/*
 data/processed/*
 !data/**/.gitkeep
 .DS_Store
+*.egg-info/
