@@ -7,7 +7,7 @@
 CFPB Consumer Complaint Database, narratives archive file covering April–July 2024 (`data/raw/complaints.csv`, downloaded <FILL: date>). Public federal data; terms of use to be verified by <NAME>, <DATE>. Because CFPB stopped publishing narratives on Aug 14, 2026, this archive is a fixed, frozen snapshot. Details: `docs/DATA_CARD.md`.
 
 ## 2. Data card summary
-- Raw rows: <FILL FROM RUN: n_rows_raw>; rows with a narrative: <FILL FROM RUN>; after cleaning and filtering: <FILL FROM RUN>; final modelling set: <FILL FROM RUN: n_rows_final> rows, <FILL FROM RUN: n_classes_final> classes, <FILL FROM RUN: n_groups_final> duplicate groups.
+- Raw rows: <FILL FROM RUN: n_rows_raw>; rows with a narrative: <FILL FROM RUN>; after cleaning: <FILL FROM RUN>; after keeping one row per duplicate group, the final modelling set is <FILL FROM RUN: n_rows_final> distinct complaints in <FILL FROM RUN: n_classes_final> classes.
 - Label: `Product` (normalised). Input: `Consumer complaint narrative` (masked tokens removed).
 - Dropped classes (< 200 rows): <FILL FROM RUN: dropped_classes>.
 
@@ -23,7 +23,7 @@ Model output (from M3 on): one predicted `Product` per narrative, plus per-class
 ## 4. Initial EDA findings
 - Class distribution: majority class <FILL FROM SUBANGAN: name> = <FILL>% of rows; minority class <FILL> = <FILL>%; imbalance ratio <FILL FROM SUBANGAN>; normalised entropy <FILL FROM SUBANGAN>. (Figure: `results/figures/<FILL>`)
 - Narrative length: median <FILL FROM SUBANGAN/RUN> tokens; <FILL FROM RUN: lt_20_tokens> narratives under 20 tokens.
-- Duplication: <FILL FROM RUN: rows_in_multi_row_groups> rows (<FILL>%) belong to multi-row groups, mostly same-day filings against the three credit bureaus.
+- Duplication: <FILL FROM RUN: dedupe.exact_duplicate_rows> narratives (<FILL>%) are exact copies of another narrative, mostly credit-repair template letters in credit reporting and debt collection; the largest template appears <FILL FROM RUN: dedupe.largest_group> times. <FILL FROM RUN: collapse.groups_with_label_conflict> identical texts were filed under more than one product (label noise). We keep one row per duplicate group.
 - Narrative coverage: only <FILL FROM RUN>% of raw complaints include a narrative.
 
 ## 5. Target and task
@@ -33,10 +33,12 @@ Multiclass text classification: `Consumer complaint narrative` → `Product`. Mo
 | Risk | Mitigation |
 |---|---|
 | Narratives discontinued Aug 14, 2026 | Frozen archive snapshot; documented; no refresh needed for the course |
-| Near-duplicate leakage (3-bureau filings, reworded templates) | Exact + near-duplicate grouping; group-aware splits; leakage tests |
+| Near-duplicate leakage (3-bureau filings, template letters) | Exact + near-duplicate grouping; one row per group; group-aware splits; leakage tests |
+| Collapsing templates changes the evaluated distribution | Report results as performance on distinct complaints; keep `group_size` for a weighted sensitivity check |
+| Label noise (same text under different products) | Majority label per group; conflict count reported |
 | Severe class imbalance | Macro F1 primary metric; stratified splits; per-class reporting |
 | Rare classes too small to evaluate | min_class_count = 200 |
-| k-NN compute cost | 100k group-aware stratified sample; sparse TF-IDF |
+| k-NN compute cost | ~98k distinct complaints after collapsing; sparse TF-IDF; `sample_size` available if needed |
 | License terms unverified | Verification assigned to <NAME> by <DATE> |
 
 ## 7. Train / validation / test strategy
@@ -49,5 +51,5 @@ Macro F1 on the test set. It weights every product equally, so the dominant cred
 ## 9. Feasibility and compute plan
 <!-- Replace with Alex's paragraph (Section 2) once 06_compute_estimate.py has run on real data. -->
 - Cleaning pipeline tested end-to-end on a synthetic ~330k-narrative file: ~70 s on a laptop. Real run time: <FILL FROM RUN: 01 total seconds> s.
-- Modelling set: 100,000 rows × ≤ 10,000 TF-IDF features (sparse); NB/LR train in seconds to minutes; k-NN brute-force sparse search on ~70k training rows is feasible in batches.
+- Modelling set: <FILL FROM RUN: n_rows_final> rows × ≤ 10,000 TF-IDF features (sparse); NB/LR train in seconds to minutes; k-NN brute-force sparse search on ~70% of that as training rows is feasible in batches.
 - All steps are reproducible from `make m2` (download check → clean → split → EDA → tests), seed 42, with configuration in `configs/config.yaml`.
