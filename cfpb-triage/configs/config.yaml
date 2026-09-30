@@ -3,8 +3,13 @@ data:
   raw_path: data/raw/complaints.csv
   label_col: Product
   text_col: Consumer complaint narrative
-  min_class_count: 100     # TODO decide in M2
-  sample_size: null        # TODO decide in M2
+  min_class_count: 200     # M2: >=200 rows so val/test (15% each) hold approx 30 per class
+  sample_size: 100000      # M2: group-aware stratified cap for k-NN compute; null = use all
+dedupe:
+  block_on: [date_received, state, zip, issue]
+  prefix_chars: 200        # same (date, state, zip, issue) block + same 200-char normalised prefix
+  cosine_threshold: 0.80   # or TF-IDF (1-2 gram) cosine >= 0.80 within the block
+  max_block_size: 2000     # larger blocks use the prefix rule only
 split:
   train: 0.70
   val: 0.15
