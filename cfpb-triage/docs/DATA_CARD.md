@@ -2,9 +2,9 @@
 
 ## Source
 - **Publisher:** Consumer Financial Protection Bureau (CFPB), Consumer Complaint Database
-- **URL:** https://www.consumerfinance.gov/data-research/consumer-complaints/ (narratives archive section). Exact file link: <FILL: https://files.consumerfinance.gov/f/documents/CCDB_Export_6_April_2024_through_July_2024.zip>
+- **URL:** https://www.consumerfinance.gov/data-research/consumer-complaints/ (narratives archive section). Exact file link: https://files.consumerfinance.gov/f/documents/CCDB_Export_6_April_2024_through_July_2024.zip
 - **File / date range:** April 2024 – July 2024 narratives archive, saved as `data/raw/complaints.csv` (not committed)
-- **Download date:** <FILL: 2026-09-30, downloaded by kevin>
+- **Download date:** 2026-09-30, downloaded by kevin
 - **File size / raw rows:** <FILL FROM RUN: 00 output MB> MB / <FILL FROM RUN: n_rows_raw> rows
 - **SHA-256 of complaints.csv:** <FILL: hash> (every teammate should get the same value; PowerShell: `Get-FileHash data\raw\complaints.csv -Algorithm SHA256`)
 - **Frozen snapshot:** CFPB stopped publishing consumer narratives on Aug 14, 2026. No newer narrative data will appear, so this archive file is the project's fixed dataset and cannot be refreshed.
