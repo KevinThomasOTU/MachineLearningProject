@@ -6,10 +6,12 @@ Pipeline (each step logs its row count to stdout and results/logs/cleaning_log.j
   3. build norm_text: lowercase, strip XXXX / XX/XX/XXXX masks, collapse whitespace
   4. drop rows whose norm_text is empty after masking; drop repeated Complaint IDs
   5. assign group_id (exact norm_text matches + near-duplicates, see assign_groups)
-  6. drop classes with fewer than data.min_class_count rows
-  7. optional group-aware stratified sample down to data.sample_size rows
-Rows that share a group_id are NOT removed here; the splitter keeps each group
-inside one split so near-duplicates cannot leak between train/val/test.
+  6. if data.one_row_per_group: keep one representative row per group
+     (majority label; group_size records how many rows it stood for)
+  7. drop classes with fewer than data.min_class_count rows
+  8. optional group-aware stratified sample down to data.sample_size rows
+With one_row_per_group off, rows sharing a group_id are kept and the splitter
+keeps each group inside one split so near-duplicates cannot leak.
 """
 from __future__ import annotations
 
@@ -25,7 +27,7 @@ from cfpb_triage.data.load import resolve
 
 OUTPUT_COLUMNS = [
     "complaint_id", "date_received", "product", "narrative", "norm_text",
-    "group_id", "state", "zip", "company",
+    "group_id", "group_size", "state", "zip", "company",
 ]
 
 # Older CFPB product names -> current names (only applied if they appear).
@@ -171,6 +173,28 @@ def _finalize_groups(df: pd.DataFrame, uf: _UnionFind) -> pd.Series:
     return pd.Series(min_id.astype(np.int64), index=df.index, name="group_id")
 
 
+def collapse_groups(df: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
+    """Keep one row per group_id.
+
+    The group's label is its majority product (ties -> alphabetically first, so
+    the result is deterministic); the kept row is the lowest Complaint ID with
+    that label. group_size keeps the number of rows the group had.
+    """
+    counts = (df.groupby(["group_id", "product"]).size().rename("n").reset_index()
+                .sort_values(["group_id", "n", "product"], ascending=[True, False, True]))
+    majority = counts.drop_duplicates("group_id").set_index("group_id")["product"]
+    labels_per_group = counts.groupby("group_id").size()
+    conflict = labels_per_group[labels_per_group > 1].index
+
+    rep = df[df["product"].to_numpy() == df["group_id"].map(majority).to_numpy()]
+    rep = (rep.assign(_id=pd.to_numeric(rep["complaint_id"], errors="coerce"))
+              .sort_values("_id").drop_duplicates("group_id").drop(columns="_id"))
+    stats = {"groups_with_label_conflict": int(len(conflict)),
+             "rows_in_label_conflict_groups": int(df["group_id"].isin(conflict).sum()),
+             "rows_removed_by_collapse": int(len(df) - len(rep))}
+    return rep, stats
+
+
 # ----------------------------------------------------------------------------- sampling
 def sample_by_group(df: pd.DataFrame, sample_size: int, min_class_count: int,
                     seed: int) -> pd.DataFrame:
@@ -248,6 +272,7 @@ def clean(df: pd.DataFrame, cfg: dict,
 
     out = out.reset_index(drop=True)
     out["group_id"], group_stats = assign_groups(out, **dedupe_cfg)
+    out["group_size"] = out.groupby("group_id")["group_id"].transform("size")
     sizes = out.groupby("group_id").size()
     dedupe_summary = {
         **group_stats,
@@ -260,6 +285,11 @@ def clean(df: pd.DataFrame, cfg: dict,
     log["dedupe"] = dedupe_summary
     step("assign_group_id", out, **{k: dedupe_summary[k] for k in
                                     ("n_groups", "rows_in_multi_row_groups")})
+
+    if dcfg.get("one_row_per_group", False):
+        out, collapse_stats = collapse_groups(out)
+        log["collapse"] = collapse_stats
+        step("one_row_per_group", out, **collapse_stats)
 
     counts = out["product"].value_counts()
     rare = counts[counts < dcfg["min_class_count"]]
