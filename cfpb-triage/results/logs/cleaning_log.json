@@ -1,0 +1,129 @@
+{
+  "steps": [
+    {
+      "step": "raw",
+      "rows": 839903,
+      "dropped": 0
+    },
+    {
+      "step": "drop_null_blank_narrative",
+      "rows": 276332,
+      "dropped": 563571
+    },
+    {
+      "step": "drop_null_label",
+      "rows": 276332,
+      "dropped": 0
+    },
+    {
+      "step": "drop_empty_after_masking",
+      "rows": 276275,
+      "dropped": 57
+    },
+    {
+      "step": "drop_repeated_complaint_id",
+      "rows": 276275,
+      "dropped": 0
+    },
+    {
+      "step": "assign_group_id",
+      "rows": 276275,
+      "dropped": 0,
+      "n_groups": 97655,
+      "rows_in_multi_row_groups": 209601
+    },
+    {
+      "step": "one_row_per_group",
+      "rows": 97655,
+      "dropped": 178620,
+      "groups_with_label_conflict": 345,
+      "rows_in_label_conflict_groups": 26932,
+      "rows_removed_by_collapse": 178620
+    },
+    {
+      "step": "min_class_count>=200",
+      "rows": 97655,
+      "dropped": 0,
+      "classes_dropped": 0
+    },
+    {
+      "step": "sample_size=None",
+      "rows": 97655,
+      "dropped": 0
+    }
+  ],
+  "config": {
+    "data": {
+      "raw_path": "data/raw/complaints.csv",
+      "label_col": "Product",
+      "text_col": "Consumer complaint narrative",
+      "min_class_count": 200,
+      "one_row_per_group": true,
+      "sample_size": null
+    },
+    "dedupe": {
+      "block_on": [
+        "date_received",
+        "state",
+        "zip",
+        "issue"
+      ],
+      "prefix_chars": 200,
+      "cosine_threshold": 0.8,
+      "max_block_size": 2000
+    },
+    "seed": 42
+  },
+  "class_map": {
+    "Checking or savings account": "Checking or savings account",
+    "Credit card": "Credit card",
+    "Credit reporting or other personal consumer reports": "Credit reporting or other personal consumer reports",
+    "Debt collection": "Debt collection",
+    "Debt or credit management": "Debt or credit management",
+    "Money transfer, virtual currency, or money service": "Money transfer, virtual currency, or money service",
+    "Mortgage": "Mortgage",
+    "Payday loan, title loan, personal loan, or advance loan": "Payday loan, title loan, personal loan, or advance loan",
+    "Prepaid card": "Prepaid card",
+    "Student loan": "Student loan",
+    "Vehicle loan or lease": "Vehicle loan or lease"
+  },
+  "dedupe": {
+    "exact_links": 139710,
+    "prefix_links": 18054,
+    "cosine_links": 20856,
+    "blocks_checked": 64174,
+    "blocks_prefix_only": 0,
+    "n_groups": 97655,
+    "rows_in_multi_row_groups": 209601,
+    "n_multi_row_groups": 30981,
+    "largest_group": 7788,
+    "exact_duplicate_rows": 139710
+  },
+  "collapse": {
+    "groups_with_label_conflict": 345,
+    "rows_in_label_conflict_groups": 26932,
+    "rows_removed_by_collapse": 178620
+  },
+  "dropped_classes": {},
+  "short_narratives": {
+    "lt_5_tokens": 190,
+    "lt_20_tokens": 5308,
+    "median_tokens": 119.0
+  },
+  "final_class_counts": {
+    "Credit reporting or other personal consumer reports": 50092,
+    "Debt collection": 12803,
+    "Credit card": 10188,
+    "Checking or savings account": 9599,
+    "Mortgage": 3877,
+    "Money transfer, virtual currency, or money service": 3085,
+    "Student loan": 2456,
+    "Vehicle loan or lease": 2328,
+    "Payday loan, title loan, personal loan, or advance loan": 1594,
+    "Prepaid card": 1182,
+    "Debt or credit management": 451
+  },
+  "n_rows_final": 97655,
+  "n_groups_final": 97655,
+  "n_classes_final": 11
+}
