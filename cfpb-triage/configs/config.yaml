@@ -1,0 +1,15 @@
+seed: 42
+data:
+  raw_path: data/raw/complaints.csv
+  label_col: Product
+  text_col: Consumer complaint narrative
+  min_class_count: 100     # TODO decide in M2
+  sample_size: null        # TODO decide in M2
+split:
+  train: 0.70
+  val: 0.15
+  test: 0.15
+tfidf:
+  stop_words: [null, english]
+  ngram_range: [[1, 1], [1, 2]]
+  max_features: [1000, 5000, 10000]

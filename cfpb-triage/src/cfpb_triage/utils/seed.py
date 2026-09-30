@@ -1,0 +1,1 @@
+"""Global seeding helper (Sayon)."""

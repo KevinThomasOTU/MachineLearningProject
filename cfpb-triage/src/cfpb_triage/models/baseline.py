@@ -1,0 +1,1 @@
+"""Stratified Random benchmark (Sayon)."""
