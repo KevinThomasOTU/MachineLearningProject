@@ -1,12 +1,11 @@
-"""Spot-check near-duplicate groups (Kevin, M2 step 4).
+"""Spot-check the near-duplicate groups (Kevin).
 
-Re-runs cleaning in memory WITHOUT collapsing groups, then picks groups whose
-rows are not all identical (i.e. joined by the prefix or cosine rule):
-  - 10 random ones, and
-  - 10 with the lowest text similarity (the riskiest merges).
-Prints them and writes results/tables/spotcheck_groups.csv with an empty
-`verdict` column to fill in (same_complaint / wrong_merge).
-Does not touch data/interim/cleaned.csv or results/logs/cleaning_log.json.
+Runs the cleaning again in memory without collapsing the groups, then looks at
+groups that aren't just exact copies (merged by the prefix or cosine rule) and
+picks 20 to read: 10 random, and 10 where the texts are least alike (the most
+likely wrong merges). Prints them and saves results/tables/spotcheck_groups.csv
+with an empty `verdict` column to fill in.
+It doesn't touch cleaned.csv or the cleaning log.
 """
 import tempfile
 from pathlib import Path
@@ -22,7 +21,7 @@ N_RANDOM, N_LOWEST, SHOW_CHARS = 10, 10, 250
 
 
 def min_similarity(texts: list[str]) -> float:
-    """Lowest pairwise TF-IDF cosine among a group's distinct texts."""
+    """Smallest TF-IDF cosine between any two texts in a group."""
     X = TfidfVectorizer(ngram_range=(1, 2), sublinear_tf=True).fit_transform(texts)
     sim = (X @ X.T).toarray()
     return float(sim[np.triu_indices(len(texts), k=1)].min())
@@ -37,7 +36,7 @@ def main() -> None:
 
     distinct = df.groupby("group_id")["norm_text"].nunique()
     near = distinct[distinct > 1].index
-    print(f"\n{len(near):,} groups contain more than one distinct text (joined by prefix/cosine)")
+    print(f"\n{len(near):,} groups contain more than one distinct text (merged by prefix or cosine)")
 
     rows = []
     for gid in near:
@@ -69,7 +68,7 @@ def main() -> None:
         print(f"companies: {r.companies}\nproducts:  {r.products}")
         print(f"  A: {r.text_a}")
         print(f"  B: {r.text_b}")
-    print(f"\nWrote {len(pick)} groups -> {out}  (fill the 'verdict' column)")
+    print(f"\nWrote {len(pick)} groups -> {out}  - fill in the 'verdict' column")
 
 
 if __name__ == "__main__":

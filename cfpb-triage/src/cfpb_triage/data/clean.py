@@ -1,17 +1,17 @@
-"""Drop null narratives, normalise labels, dedupe; log row counts (Kevin).
+"""Clean the raw complaints: drop empty narratives, fix labels, find duplicates (Kevin).
 
-Pipeline (each step logs its row count to stdout and results/logs/cleaning_log.json):
-  1. drop null/blank narratives and null labels
-  2. normalise Product labels (whitespace + legacy-name merge); print the class map
-  3. build norm_text: lowercase, strip XXXX / XX/XX/XXXX masks, collapse whitespace
-  4. drop rows whose norm_text is empty after masking; drop repeated Complaint IDs
-  5. assign group_id (exact norm_text matches + near-duplicates, see assign_groups)
-  6. if data.one_row_per_group: keep one representative row per group
-     (majority label; group_size records how many rows it stood for)
-  7. drop classes with fewer than data.min_class_count rows
-  8. optional group-aware stratified sample down to data.sample_size rows
-With one_row_per_group off, rows sharing a group_id are kept and the splitter
-keeps each group inside one split so near-duplicates cannot leak.
+What happens, in order (row counts are printed and saved to results/logs/cleaning_log.json):
+  1. drop rows with no narrative or no label
+  2. tidy the Product labels and print the class map
+  3. build norm_text: lowercase, remove the XXXX / XX/XX/XXXX masks, squash whitespace
+  4. drop rows that are empty after that, and repeated Complaint IDs
+  5. give every row a group_id (exact copies + near-duplicates, see assign_groups)
+  6. if one_row_per_group is on, keep one row per group (majority label, and
+     group_size says how many rows it replaced)
+  7. drop classes smaller than min_class_count
+  8. optionally sample down to sample_size
+If one_row_per_group is off, the duplicates stay and the splitter keeps each
+group together instead.
 """
 from __future__ import annotations
 
@@ -30,7 +30,7 @@ OUTPUT_COLUMNS = [
     "group_id", "group_size", "state", "zip", "company",
 ]
 
-# Older CFPB product names -> current names (only applied if they appear).
+# old CFPB product names mapped to the current ones (only matters if they show up)
 LEGACY_PRODUCT_MAP = {
     "Credit reporting, credit repair services, or other personal consumer reports":
         "Credit reporting or other personal consumer reports",
@@ -42,9 +42,9 @@ LEGACY_PRODUCT_MAP = {
     "Bank account or service": "Checking or savings account",
 }
 
-# Masked dates such as xx/xx/xxxx, xx/xx/2024 (at least one masked part; real dates kept).
+# masked dates like xx/xx/xxxx or xx/xx/2024 (needs at least one x, so real dates stay)
 _DATE_MASK = re.compile(r"\b(?=[x\d/]*x)[x\d]{1,2}/[x\d]{1,2}/[x\d]{2,4}\b")
-# Masked words/numbers: xx, xxxx, xxxx1234 (does not touch words like "exxon").
+# masked words/numbers like xx, xxxx, xxxx1234 (leaves words like "exxon" alone)
 _X_MASK = re.compile(r"\b(?:x{2,}\d*|\d+x{2,})\b")
 _WS = re.compile(r"\s+")
 
@@ -54,7 +54,7 @@ DEFAULT_DEDUPE = {"block_on": ["date_received", "state", "zip", "issue"],
 
 # ----------------------------------------------------------------------------- text
 def normalize_text(text: str) -> str:
-    """Lowercase, remove CFPB masking tokens, collapse whitespace."""
+    """Lowercase, strip the CFPB masks, squash whitespace."""
     t = str(text).lower()
     t = _DATE_MASK.sub(" ", t)
     t = _X_MASK.sub(" ", t)
@@ -62,9 +62,9 @@ def normalize_text(text: str) -> str:
 
 
 def normalize_labels(products: pd.Series) -> tuple[pd.Series, dict]:
-    """Strip/collapse whitespace and merge legacy product names.
+    """Tidy whitespace and merge old product names.
 
-    Returns (normalised series, class map {raw label: normalised label}).
+    Returns the cleaned labels and a {raw label: cleaned label} map for printing.
     """
     stripped = products.astype(str).str.replace(_WS, " ", regex=True).str.strip()
     normed = stripped.replace(LEGACY_PRODUCT_MAP)
@@ -83,7 +83,7 @@ class _UnionFind:
         root = i
         while p[root] != root:
             root = p[root]
-        while p[i] != root:  # path compression
+        while p[i] != root:  # point everything on the path at the root
             p[i], i = root, p[i]
         return root
 
@@ -102,20 +102,19 @@ def assign_groups(df: pd.DataFrame,
                   block_on: tuple[str, ...] = ("date_received", "state", "zip", "issue"),
                   prefix_chars: int = 200, cosine_threshold: float = 0.80,
                   max_block_size: int = 2000) -> tuple[pd.Series, dict]:
-    """Assign a group_id so exact and near-duplicate narratives share a group.
+    """Give exact and near-duplicate narratives the same group_id.
 
-    Method (linear-ish, no all-pairs comparison):
-      A. exact: rows with identical norm_text are unioned (global).
-      B. near-duplicate: rows are blocked on `block_on` (default: date_received,
-         state, zip, issue; missing values count as "").
-         Inside each block of >= 2 rows, two rows are unioned if
-           - their first `prefix_chars` characters of norm_text match, or
-           - TF-IDF (word 1-2 gram, sublinear tf) cosine >= cosine_threshold.
-         Blocks larger than max_block_size use the prefix rule only.
-    Connected components (union-find) become groups. group_id is the smallest
-    complaint_id in the group, so it is stable if row order changes.
+    Comparing every pair of rows would be far too slow, so:
+      A. rows with identical norm_text go in the same group.
+      B. for near-duplicates, rows are first split into blocks by `block_on`
+         (date, state, zip, issue). Inside a block two rows are joined if
+           - the first `prefix_chars` characters of norm_text match, or
+           - their TF-IDF cosine similarity is at least cosine_threshold.
+         Blocks bigger than max_block_size only use the prefix rule.
+    Rows linked this way (directly or through other rows) end up in one group,
+    and group_id is the smallest complaint_id in it, so it doesn't depend on row order.
 
-    Expects columns: complaint_id, norm_text and every column in block_on.
+    Needs complaint_id, norm_text and every column in block_on.
     """
     n = len(df)
     uf = _UnionFind(n)
@@ -123,17 +122,17 @@ def assign_groups(df: pd.DataFrame,
     stats = {"exact_links": 0, "prefix_links": 0, "cosine_links": 0,
              "blocks_checked": 0, "blocks_prefix_only": 0}
 
-    # A. exact matches on the normalised key
+    # A. exact copies
     for idx in pd.Series(pos).groupby(df["norm_text"].to_numpy()).groups.values():
         if len(idx) > 1:
             uf.union_many(idx)
             stats["exact_links"] += len(idx) - 1
 
-    # B. near-duplicates inside (date, state, zip, issue) blocks
+    # B. near-duplicates, only compared inside a block
     block_key = df[block_on[0]].fillna("").astype(str)
     for col in block_on[1:]:
         block_key = block_key + "|" + df[col].fillna("").astype(str)
-    # B1. prefix rule, vectorised: same block AND same normalised prefix
+    # B1. same block and same start of the text
     prefix_key = block_key + "||" + df["norm_text"].str[:prefix_chars]
     for idx in pd.Series(pos).groupby(prefix_key.to_numpy()).groups.values():
         if len(idx) > 1:
@@ -141,7 +140,7 @@ def assign_groups(df: pd.DataFrame,
             uf.union_many(idx)
             stats["prefix_links"] += len(roots) - 1
 
-    # B2. cosine rule inside each block (blocks laid out contiguously in X)
+    # B2. cosine similarity within each block (X has the blocks one after another)
     blocks = [np.asarray(b) for b in
               pd.Series(pos).groupby(block_key.to_numpy()).groups.values() if len(b) > 1]
     stats["blocks_checked"] = len(blocks)
@@ -151,7 +150,7 @@ def assign_groups(df: pd.DataFrame,
         order = np.concatenate(small)
         vec = TfidfVectorizer(ngram_range=(1, 2), sublinear_tf=True,
                               max_features=2**18, dtype=np.float32)
-        X = vec.fit_transform(df["norm_text"].to_numpy()[order]).tocsr()  # L2-normalised rows
+        X = vec.fit_transform(df["norm_text"].to_numpy()[order]).tocsr()  # rows are unit length
         start = 0
         for b in small:
             Xb = X[start:start + len(b)]
@@ -174,11 +173,11 @@ def _finalize_groups(df: pd.DataFrame, uf: _UnionFind) -> pd.Series:
 
 
 def collapse_groups(df: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
-    """Keep one row per group_id.
+    """Keep a single row for each group_id.
 
-    The group's label is its majority product (ties -> alphabetically first, so
-    the result is deterministic); the kept row is the lowest Complaint ID with
-    that label. group_size keeps the number of rows the group had.
+    The group gets its most common product as the label (ties go to the first
+    one alphabetically so reruns match). The row we keep is the lowest
+    Complaint ID with that label, and group_size remembers how big the group was.
     """
     counts = (df.groupby(["group_id", "product"]).size().rename("n").reset_index()
                 .sort_values(["group_id", "n", "product"], ascending=[True, False, True]))
@@ -198,11 +197,11 @@ def collapse_groups(df: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
 # ----------------------------------------------------------------------------- sampling
 def sample_by_group(df: pd.DataFrame, sample_size: int, min_class_count: int,
                     seed: int) -> pd.DataFrame:
-    """Group-aware stratified downsample to about `sample_size` rows.
+    """Shrink the data to roughly `sample_size` rows, keeping whole groups.
 
-    Each class keeps round(n_c * frac) rows (whole groups only), but never fewer
-    than min(n_c, min_class_count), so no class that survived the min_class_count
-    filter is removed by sampling. Groups are assigned to their majority label.
+    Every class keeps about the same share of its rows, but never drops below
+    min_class_count, so sampling can't wipe out a small class. A group counts
+    towards its most common label.
     """
     if sample_size is None or len(df) <= sample_size:
         return df
@@ -223,9 +222,9 @@ def sample_by_group(df: pd.DataFrame, sample_size: int, min_class_count: int,
 # ----------------------------------------------------------------------------- main
 def clean(df: pd.DataFrame, cfg: dict,
           log_path: str | Path = "results/logs/cleaning_log.json") -> pd.DataFrame:
-    """Clean the raw frame from load_raw(); returns OUTPUT_COLUMNS.
+    """Clean the raw frame from load_raw() and return OUTPUT_COLUMNS.
 
-    Writes a JSON log of every step's row count to `log_path`.
+    Also saves the row count after each step to `log_path` as json.
     """
     dcfg = cfg["data"]
     text_col, label_col = dcfg["text_col"], dcfg["label_col"]

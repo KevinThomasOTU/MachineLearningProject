@@ -1,7 +1,7 @@
 """Entry point: 00_download_data. Import from cfpb_triage and call; keep logic in src/.
 
-Does NOT download or scrape anything. Prints how to obtain the frozen CFPB
-narratives archive file and checks that it is in place with the expected columns.
+We don't scrape anything. This just tells you where to get the archive file
+and checks that it's in the right place with the columns we need.
 """
 import sys
 
@@ -10,17 +10,18 @@ import pandas as pd
 from cfpb_triage.data.load import RAW_COLUMNS, load_config, resolve
 
 INSTRUCTIONS = """
-CFPB narratives archive (April 2024 - July 2024) is required at:
+The CFPB narratives archive (April - July 2024) needs to be at:
     {path}
 
-How to obtain it (manual, no scraping):
-  1. Open https://www.consumerfinance.gov/data-research/consumer-complaints/
-     and go to the Consumer Complaint Database narratives archive.
-  2. Download the April 2024 - July 2024 CSV file (unzip if needed).
-  3. Save it as  {path}
-  4. Record the download date and the exact file name/link in docs/DATA_CARD.md.
-Note: CFPB stopped publishing new narratives on Aug 14, 2026, so this archive
-snapshot is the project's frozen dataset. Do not commit it (data/raw is git-ignored).
+To get it:
+  1. Go to https://www.consumerfinance.gov/data-research/consumer-complaints/
+     and find the narratives archive.
+  2. Download the April - July 2024 file (unzip it if needed).
+  3. Save it as {path}
+  4. Write the download date and file link in docs/DATA_CARD.md.
+
+CFPB stopped publishing narratives on Aug 14, 2026, so this archive is the
+dataset we're stuck with. Don't commit it (data/raw is git-ignored).
 """
 
 
@@ -29,7 +30,7 @@ def main() -> int:
     path = resolve(cfg["data"]["raw_path"])
     if not path.exists():
         print(INSTRUCTIONS.format(path=path))
-        print("[00] MISSING raw file -> stopping.")
+        print("[00] raw file not found, stopping.")
         return 1
 
     header = list(pd.read_csv(path, nrows=0).columns)
@@ -37,9 +38,9 @@ def main() -> int:
     size_mb = path.stat().st_size / 1e6
     print(f"[00] found {path} ({size_mb:,.1f} MB, {len(header)} columns)")
     if missing:
-        print(f"[00] ERROR: missing expected columns: {missing}")
+        print(f"[00] missing columns: {missing}")
         return 1
-    print("[00] all required columns present:", ", ".join(RAW_COLUMNS))
+    print("[00] all the columns we need are there:", ", ".join(RAW_COLUMNS))
     return 0
 
 

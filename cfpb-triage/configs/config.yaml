@@ -3,14 +3,14 @@ data:
   raw_path: data/raw/complaints.csv
   label_col: Product
   text_col: Consumer complaint narrative
-  min_class_count: 200     # M2: >=200 rows so val/test (15% each) hold approx 30 per class
-  one_row_per_group: true  # M2: templated letters are ~50% of rows; keep one row per duplicate group
-  sample_size: null        # M2: ~97.6k distinct groups already fit compute; set a number to cap
+  min_class_count: 200     # need ~30 per class in val/test (15% each)
+  one_row_per_group: true  # about half the narratives are copies of template letters
+  sample_size: null        # not needed now, ~98k distinct complaints is small enough
 dedupe:
   block_on: [date_received, state, zip, issue]
-  prefix_chars: 200        # same (date, state, zip, issue) block + same 200-char normalised prefix
-  cosine_threshold: 0.80   # or TF-IDF (1-2 gram) cosine >= 0.80 within the block
-  max_block_size: 2000     # larger blocks use the prefix rule only
+  prefix_chars: 200        # same block + same first 200 characters = duplicate
+  cosine_threshold: 0.80   # ...or TF-IDF cosine at least this high
+  max_block_size: 2000     # bigger blocks only use the prefix check (keeps it fast)
 split:
   train: 0.70
   val: 0.15
