@@ -42,14 +42,10 @@ Multiclass text classification: `Consumer complaint narrative` → `Product`. Mo
 | License terms unverified | Verification assigned to <NAME> by <DATE> |
 
 ## 7. Train / validation / test strategy
-<!-- Replace with Alex's paragraph (Section 2) once his numbers are in. -->
-70/15/15, seed 42, stratified on Product, group-aware so no `group_id` appears in more than one split. Sizes: train <FILL FROM ALEX>, val <FILL FROM ALEX>, test <FILL FROM ALEX>. Largest per-class proportion difference vs full data: <FILL FROM ALEX/SAYON> percentage points. Test set is held out until final evaluation. Leakage tests: <FILL FROM SAYON: N passed / N total>.
+After cleaning, each duplicate group is one row, so we have 97,655 distinct complaints. We split them 70/15/15 (seed 42) using scikit-learn's StratifiedGroupKFold with 20 folds. Each fold is stratified on Product and only holds whole duplicate groups. 14 folds go to train, 3 to validation and 3 to test. Since every `group_id` is in exactly one split, the same complaint (or a near-copy of it) can't show up in both training and evaluation. Split sizes: train 68,357, validation 14,649, test 14,649. No class's share differs from the full data by more than 0.01 percentage points (chi-square p = <FILL FROM SUBANGAN: split_chi2.json p_value>). TF-IDF and all model parameters are fit on train only, hyperparameters are tuned on validation, and test is used once for the final Macro F1. All 12 leakage tests in `tests/test_split.py` pass.
 
 ## 8. Primary metric
 Macro F1 on the test set. It weights every product equally, so the dominant credit-reporting class cannot mask poor minority-class performance. Secondary: per-class F1, accuracy, weighted F1, confusion matrix.
 
 ## 9. Feasibility and compute plan
-<!-- Replace with Alex's paragraph (Section 2) once 06_compute_estimate.py has run on real data. -->
-- Cleaning pipeline tested end-to-end on a synthetic ~330k-narrative file: ~70 s on a laptop. Real run time: <FILL FROM RUN: 01 total seconds> s.
-- Modelling set: <FILL FROM RUN: n_rows_final> rows × ≤ 10,000 TF-IDF features (sparse); NB/LR train in seconds to minutes; k-NN brute-force sparse search on ~70% of that as training rows is feasible in batches.
-- All steps are reproducible from `make m2` (download check → clean → split → EDA → tests), seed 42, with configuration in `configs/config.yaml`.
+We timed one run of each step on a 10,000-row sample of the training set, using the most expensive setting (1–2-grams, 10,000 features), on a laptop with an Intel Core Ultra 5 125U (12 cores) and 15 GB RAM. Measured times: TF-IDF 2.9 s, Multinomial NB 0.2 s, logistic regression 2.4 s, and k-NN (cosine + Euclidean) predicting 2,000 validation rows 1.7 s. Scaled up to all 97,655 complaints, one run takes about 123 s, and the full ablation grid (12 TF-IDF settings × 3 models × 3 seeds = 36 runs) takes about 1.2 h. k-NN is the slowest part (about 70% of the time) because brute-force search grows with n_train × n_val. This is well within our budget, so we use all 97,655 distinct complaints with no sampling (`sample_size: null`; see `results/tables/compute_estimate.csv`). Everything runs on CPU with a fixed seed and can be reproduced with `make m2`.
