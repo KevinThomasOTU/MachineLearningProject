@@ -1,0 +1,7 @@
+,measured_s,per_run_s_N=97655
+tfidf_fit+transform,2.881,19.849
+multinomial_nb_fit,0.19,1.297
+logreg_fit,2.366,16.176
+knn_predict_cos+euc,1.707,85.465
+TOTAL per run,7.144,122.787
+GRID x36 runs (hours),,1.228
