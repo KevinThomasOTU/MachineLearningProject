@@ -10,7 +10,9 @@
 - **Frozen snapshot:** CFPB stopped publishing consumer narratives on Aug 14, 2026. No newer narrative data will appear, so this archive file is the project's fixed dataset and cannot be refreshed.
 
 ## License / terms
-CFPB complaint data is published by a U.S. federal agency for public use. Exact terms of use and attribution requirements: **to be verified by <>, <DATE>** (link: <FILL>).
+CFPB states that "All complaint data we publish is freely available for anyone to use, analyze, and build on" (link: https://www.consumerfinance.gov/data-research/consumer-complaints/, checked <DATE> by <NAME>). No formal license text or attribution requirement was found on that page or on the "How we share complaint data" page; the data is published by a U.S. federal agency. We attribute it to the CFPB Consumer Complaint Database and make no re-identification attempts.
+**be verified by kevin, 2026-09-31**.
+
 
 ## Fields used
 | Raw column | Cleaned column | Use |
