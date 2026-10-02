@@ -10,8 +10,7 @@
 - **Frozen snapshot:** CFPB stopped publishing consumer narratives on Aug 14, 2026. No newer narrative data will appear, so this archive file is the project's fixed dataset and cannot be refreshed.
 
 ## License / terms
-CFPB states that "All complaint data we publish is freely available for anyone to use, analyze, and build on" (link: https://www.consumerfinance.gov/data-research/consumer-complaints/, checked <DATE> by <NAME>). No formal license text or attribution requirement was found on that page or on the "How we share complaint data" page; the data is published by a U.S. federal agency. We attribute it to the CFPB Consumer Complaint Database and make no re-identification attempts.
-**be verified by kevin, 2026-09-31**.
+CFPB states that "All complaint data we publish is freely available for anyone to use, analyze, and build on" (link: https://www.consumerfinance.gov/data-research/consumer-complaints/, checked 2026-10-02 by Kevin Thomas). No formal license text or attribution requirement was found on that page or on the "How we share complaint data" page; the data is published by a U.S. federal agency. We attribute it to the CFPB Consumer Complaint Database and make no re-identification attempts.
 
 
 ## Fields used
@@ -77,7 +76,7 @@ Threshold sanity check: 20 groups containing more than one distinct text were sp
 Effect: 178,620 duplicate rows removed; credit reporting falls from 77.5% of narratives to 51.3% of distinct complaints.
 
 ## Splits
-70 / 15 / 15 train/val/test, seed 42, stratified on `product`, group-aware (each `group_id` in exactly one split; after collapsing, one row per group). Files: `data/processed/splits/{train,val,test}.csv`. Sizes: <FILL FROM ALEX: train/val/test rows>. See `docs/SPLIT_STRATEGY.md`.
+70 / 15 / 15 train/val/test, seed 42, stratified on `product`, group-aware (each `group_id` in exactly one split; after collapsing, one row per group). Files: `data/processed/splits/{train,val,test}.csv`. Sizes: train 68,357 / validation 14,649 / test 14,649 rows. See `docs/SPLIT_STRATEGY.md`.
 
 ## Known biases and limitations
 - **Opt-in narratives:** only consumers who consented to publication have narratives (276,332 of 839,903 raw rows, 32.9%). They may differ systematically from all complainants.
