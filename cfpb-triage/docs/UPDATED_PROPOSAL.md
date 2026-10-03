@@ -13,26 +13,22 @@ The research question is unchanged: how do Multinomial Naive Bayes, L2 Logistic 
 |---|---|---|---|
 | Data | CFPB Complaint Database | Narratives archive file, Apr–Jul 2024 (839,903 rows; 276,332 with a narrative) | CFPB stopped publishing narratives on Aug 14, 2026, so the archive is a frozen snapshot. Results are reproducible, but no newer data exists. |
 | License | "public domain / permissive" | CFPB states the data is "freely available for anyone to use, analyze, and build on"; no formal license text found; we attribute the CFPB | Checked on 2026-10-02 (data card). |
-| Data point | each complaint | one row per group of exact or near-duplicate narratives (276,275 → 97,655) | 50.6% of narratives are exact copies (template letters, or one complaint sent to all three bureaus). Left in, one template would count thousands of times and leak across splits. |
+| Data point / label | each complaint; product or issue | one row per group of exact or near-duplicate narratives (276,275 → 97,655); label is `Product` (11 classes, smallest 451 rows) | 50.6% of narratives are exact copies (template letters, or one complaint sent to all three bureaus). Left in, one template would count thousands of times and leak across splits. |
 | Split | strict stratified | stratified **and group-aware**, 70/15/15, seed 42 (train 68,357 / val 14,649 / test 14,649) | No duplicate group can appear in two splits; 12 automated leakage tests pass. |
-| Label | product or issue | `Product`, 11 classes, none dropped (smallest has 451 rows) | Fixed after EDA. |
 | Compute | not estimated | about 123 s per run, about 1.2 h for the full grid on a laptop CPU, no sampling needed | Measured on a 10,000-row subsample and scaled up. |
 
 ## 3. Problem and data (from the M2 EDA)
 
-- **Input / label:** narrative text (masked tokens such as `XXXX` removed) → `Product`. Only 32.9% of raw complaints have a narrative (opt-in).
-- **Imbalance:** credit reporting is 51.3% of rows and the smallest class (Debt or credit management) 0.46%, a ratio of 111:1.
-- **Length:** median 119 tokens; 5.4% of narratives have fewer than 20 tokens.
-- **Benchmark floor:** a Stratified Random predictor gets accuracy ≈ 0.31 but Macro F1 only ≈ 1/K = **0.091**. This is why Macro F1 is the primary metric.
+- **Input / label:** narrative text (masked tokens such as `XXXX` removed) → `Product`. Only 32.9% of raw complaints have a narrative (opt-in); the median narrative has 119 tokens and 5.4% have fewer than 20.
+- **Imbalance:** credit reporting is 51.3% of rows and the smallest class 0.46% (111:1). A Stratified Random predictor gets accuracy ≈ 0.31 but Macro F1 only ≈ 1/K = **0.091**, which is why Macro F1 is the primary metric.
 
 ## 4. Methods (unchanged from M1)
 
 - **Benchmark:** Stratified Random prediction from the training class distribution.
 - **Models:** Multinomial Naive Bayes (Laplace α sweep), L2 Logistic Regression, k-NN with cosine and Euclidean distance.
 - **Ablation:** stop words {none, English} × n-grams {(1,1), (1,2)} × max features {1,000, 5,000, 10,000} = 12 TF-IDF settings, run for each model over several seeds.
-- **Protocol:** TF-IDF and all parameters are fit on train only; hyper-parameters are tuned on validation; the test split is used once.
-- **Evaluation:** Macro F1 (mean ± std over seeds), per-class precision and recall, confusion matrices, execution time per sample.
-- **Theory focus:** Bayes' theorem with Laplace smoothing, and cosine vs Euclidean distance in sparse TF-IDF space.
+- **Protocol:** TF-IDF and all parameters are fit on train only, hyper-parameters are tuned on validation, and the test split is used once. Reported: Macro F1 (mean ± std over seeds), per-class precision and recall, confusion matrices, time per sample.
+- **Theory focus:** Bayes' theorem with Laplace smoothing; cosine vs Euclidean distance in sparse TF-IDF space.
 
 ## 5. Risks
 
@@ -53,8 +49,7 @@ The research question is unchanged: how do Multinomial Naive Bayes, L2 Logistic 
 | M3 Baseline reproduction | Oct 19 | TF-IDF pipeline, Stratified Random benchmark, Naive Bayes baseline | Next |
 | M4 Progress presentation | Oct 30 | Theory write-up, 5-minute video, initial validation results | Planned |
 | M5 Final experiments | Nov 20 | Logistic Regression and k-NN, ablation logs, error analysis | Planned |
-| M6 Final report & repo | Dec 4 | 6–8 page report, repository release, AI use statement | Planned |
-| M7 Oral defence | Dec 7 | Individual reflection and code walkthrough | Planned |
+| M6 / M7 Final report, defence | Dec 4 / Dec 7 | 6–8 page report, repository release, AI use statement; individual reflection and oral defence | Planned |
 
 Roles: Kevin Thomas, data and documentation; Alex Facey, modelling; Subangan Sundaralingam, theory and statistics; Sayon Kirubaharan, evaluation and reproducibility.
 
