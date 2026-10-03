@@ -1,6 +1,6 @@
 # Proposal Updates (since M1)
 
-1. **New dataset snapshot.** We now use the CFPB Consumer Complaint Database *narratives archive* file for April–July 2024 instead of a live download. It is a fixed file (`data/raw/complaints.csv`, downloaded <FILL: date>), so results are reproducible.
+1. **New dataset snapshot.** We now use the CFPB Consumer Complaint Database *narratives archive* file for April–July 2024 instead of a live download. It is a fixed file (`data/raw/complaints.csv`, downloaded 2026-09-30), so results are reproducible.
 
 2. **Narrative-publication-ended risk.** CFPB stopped publishing consumer complaint narratives on Aug 14, 2026. The archive is therefore the final available snapshot. We cannot add newer data or test for drift after July 2024; this is documented as a limitation in the data card.
 
