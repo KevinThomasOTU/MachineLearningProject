@@ -11,3 +11,5 @@
 | 2026-10-02 | Kevin Thomas | Claude Code | Use Claude to format the Markdown documents (`DATA_CARD.md`, `M2_APPROVAL_MEMO.md`, `PROPOSAL_UPDATES.md`, and README) for readability and consistency before final review. | Formatting suggestions for headings, tables, lists, and cross-references, plus wording cleanup to keep the docs structured and easy to scan. | The formatting was checked against the actual files in `docs/` and `README.md`; Kevin reviewed the rendered Markdown and corrected any wording or section order before final submission. |
 
 | 2026-10-02 | Alex Facey | Claude Code | Running setup and scripts, pasting the split/compute code from the team doc, filling memo §7/§9 with the run results | `split.py`, `02_make_splits.py`, `06_compute_estimate.py`, memo §7/§9 text | The csv hash matched, split sizes and class shares matched the doc, pytest showed 12 passed like expected, compute estimate said no sampling needed |
+
+| 2026-10-02 | Sayon Kirubaharan | Claude Code | Create plots for evaluation method | 'plots.py', '03_eda.py' | pytest showed 12 passed as expected |
