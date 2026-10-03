@@ -1,0 +1,12 @@
+product,count,mean,std,min,25%,50%,75%,max
+Checking or savings account,9599.0,220.0,224.8,2.0,88.0,160.0,277.0,3369.0
+Credit card,10188.0,205.9,222.2,3.0,74.0,149.0,264.0,4126.0
+Credit reporting or other personal consumer reports,50092.0,164.8,251.4,1.0,47.0,99.0,193.0,5701.0
+Debt collection,12803.0,162.2,212.4,1.0,51.0,103.0,202.0,5735.0
+Debt or credit management,451.0,183.6,199.4,4.0,55.0,121.0,227.0,1326.0
+"Money transfer, virtual currency, or money service",3085.0,219.8,247.9,3.0,85.0,157.0,265.0,4940.0
+Mortgage,3877.0,284.2,306.6,5.0,115.0,204.0,345.0,4121.0
+"Payday loan, title loan, personal loan, or advance loan",1594.0,198.3,252.8,3.0,71.0,134.0,240.0,5638.0
+Prepaid card,1182.0,181.9,223.0,4.0,70.2,129.0,227.0,4011.0
+Student loan,2456.0,236.6,253.4,5.0,92.0,165.0,291.0,3390.0
+Vehicle loan or lease,2328.0,228.9,279.4,4.0,75.0,157.0,285.0,5534.0
