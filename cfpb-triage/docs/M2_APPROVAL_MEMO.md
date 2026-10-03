@@ -1,7 +1,7 @@
 # Milestone 2 Approval Memo: Team 32 (KASS Tech), CSCI 3052
 **Project:** Product triage of CFPB consumer complaint narratives
 **Prepared by:** Kevin Thomas (Coordinator / Data Lead), with Alex, Subangan, Sayon
-**Date:** <FILL: YYYY-MM-DD>
+**Date:** 2026-10-02
 
 ## 1. Data source and license
 CFPB Consumer Complaint Database, narratives archive file covering April–July 2024 (`data/raw/complaints.csv`, downloaded 2026-09-30). Public federal data; terms checked on 2026-10-02 by Kevin Thomas: CFPB states that the data is "freely available for anyone to use, analyze, and build on", and no formal license text or attribution requirement was found. Because CFPB stopped publishing narratives on Aug 14, 2026, this archive is a fixed, frozen snapshot. Details: `docs/DATA_CARD.md`.
@@ -12,11 +12,13 @@ CFPB Consumer Complaint Database, narratives archive file covering April–July 
 - Dropped classes (< 200 rows): none.
 
 ## 3. Sample inputs and outputs
-| complaint_id | narrative (first 150 chars, normalised) | product (label) |
-|---|---|---|
-| <FILL> | <FILL> | <FILL> |
-| <FILL> | <FILL> | <FILL> |
-| <FILL> | <FILL> | <FILL> |
+| complaint_id | narrative (first 150 chars, normalised) | product (label) | Stratified Random prediction |
+|---|---|---|---|
+| 8781165 | i wrote to mohela on regarding a payment i had made that was debited from my checking account and never reflected on my loan balance. i have still not | Student loan | Debt collection |
+| 8766695 | my direct deposit from social security administration and was connected to this account and the account was closed illegally without my permission. 18 | Checking or savings account | Credit reporting or other personal consumer reports |
+| 9474196 | i was denied a car loan on with navy federal, even though financially i can afford a car. i was deemed risky due to inaccuracies on my credit report | Vehicle loan or lease | Debt collection |
+
+Rows come from the validation split (the test split is untouched); masked tokens such as `XX/XX/XXXX` have been removed, which is why some sentences have gaps. The baseline ignores the text, so its predictions are just random draws from the training class mix. Full sample: `results/tables/sample_io.csv`.
 
 Model output (from M3 on): one predicted `Product` per narrative, plus per-class scores for NB/LR.
 
