@@ -23,11 +23,21 @@ Rows come from the validation split (the test split is untouched); masked tokens
 Model output (from M3 on): one predicted `Product` per narrative, plus per-class scores for NB/LR.
 
 ## 4. Initial EDA findings
-- Class distribution: majority class Credit reporting or other personal consumer reports = 51.3% of rows; minority class Debt or credit management = 0.46%; imbalance ratio 111:1; normalised entropy 0.68. A stratified-random guesser would get accuracy ≈ 0.31 but Macro F1 only ≈ 0.091 (= 1/11). (Figure: `results/figures/class_distribution_log.png`)
-- Narrative length: median 119 tokens; 5,308 narratives (5.4%) are under 20 tokens.
+- Class distribution: majority class Credit reporting or other personal consumer reports = 51.3% of rows; minority class Debt or credit management = 0.46%; imbalance ratio 111:1; normalised entropy 0.68. A stratified-random guesser would get accuracy ≈ 0.31 but Macro F1 only ≈ 0.091 (= 1/11). (Figure 1)
+- Narrative length: median 119 tokens; 5,308 narratives (5.4%) are under 20 tokens. Mortgage complaints are the longest (median 204 tokens) and credit reporting the shortest (median 99). (Figure 2)
 - Duplication: 139,710 narratives (50.6%) are exact copies of another narrative, mostly credit-repair template letters in credit reporting and debt collection; the largest template appears 7,788 times. Grouping removes 64.7% of rows (38,910 of them caught only by the near-duplicate rule). 345 identical texts were filed under more than one product (label noise). We keep one row per duplicate group.
 - Narrative coverage: only 32.9% of raw complaints include a narrative.
 - Split check: 0 groups and 0 identical texts are shared between splits. However, 22.0% of sampled val/test complaints have a training complaint with TF-IDF cosine ≥ 0.8 (median best match 0.40), mostly edited template letters.
+
+![Figure 1: Product class distribution (log scale)](../results/figures/class_distribution_log.png)
+
+*Figure 1: Product class distribution after cleaning (log scale).*
+
+![Figure 2: Narrative length by product](../results/figures/narrative_length_by_class.png)
+
+*Figure 2: Narrative length by product (tokens after masking, log scale).*
+
+More EDA (statistics, top terms per class, split proportions) is in `notebooks/01_eda.ipynb` and `results/tables/`.
 
 ## 5. Target and task
 Multiclass text classification: `Consumer complaint narrative` → `Product`. Models (M3+): stratified-random baseline, Multinomial Naive Bayes, L2 Logistic Regression, k-NN (cosine and Euclidean) on TF-IDF features, with an ablation over stop words, n-gram range and vocabulary size.
