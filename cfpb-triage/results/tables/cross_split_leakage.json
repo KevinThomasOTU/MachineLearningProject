@@ -1,0 +1,8 @@
+{
+  "groups_shared_across_splits": 0,
+  "norm_text_shared_across_splits": 0,
+  "residual_probe_size": 2000,
+  "residual_threshold": 0.8,
+  "residual_near_dup_rate": 0.22,
+  "residual_max_sim_median": 0.3989517072651888
+}

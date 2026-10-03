@@ -1,0 +1,166 @@
+product,rank,term,mean_tfidf
+Checking or savings account,1,account,0.07246578111731979
+Checking or savings account,2,bank,0.07153197104401614
+Checking or savings account,3,money,0.05193322721584937
+Checking or savings account,4,funds,0.043719748368259356
+Checking or savings account,5,check,0.036382932021368754
+Checking or savings account,6,told,0.03394646853591313
+Checking or savings account,7,checking,0.03133316921073763
+Checking or savings account,8,called,0.030851543560767532
+Checking or savings account,9,closed,0.029661055123183275
+Checking or savings account,10,deposit,0.027755571015211054
+Checking or savings account,11,chase,0.026319983398170696
+Checking or savings account,12,card,0.026133323130140464
+Checking or savings account,13,said,0.024515565941362914
+Checking or savings account,14,received,0.024059224249820276
+Checking or savings account,15,did,0.02379858652335381
+Credit card,1,card,0.07974300037134903
+Credit card,2,credit,0.04707376253461112
+Credit card,3,account,0.04464457195748158
+Credit card,4,payment,0.035741079529355145
+Credit card,5,bank,0.03246941284226126
+Credit card,6,late,0.028451145736462277
+Credit card,7,called,0.026941651130923155
+Credit card,8,charge,0.025087701552305358
+Credit card,9,payments,0.025072938639899664
+Credit card,10,received,0.025005138250019952
+Credit card,11,did,0.024772231551074893
+Credit card,12,charges,0.024486347881505947
+Credit card,13,told,0.023520559524792258
+Credit card,14,balance,0.023172200550292198
+Credit card,15,time,0.022321554090714693
+Credit reporting or other personal consumer reports,1,report,0.07294827989994648
+Credit reporting or other personal consumer reports,2,credit,0.07267021058503646
+Credit reporting or other personal consumer reports,3,reporting,0.05322379544200548
+Credit reporting or other personal consumer reports,4,information,0.05158314479068789
+Credit reporting or other personal consumer reports,5,account,0.045396977000120055
+Credit reporting or other personal consumer reports,6,consumer,0.04488061672259834
+Credit reporting or other personal consumer reports,7,accounts,0.04406425455538833
+Credit reporting or other personal consumer reports,8,inaccurate,0.03127674990392822
+Credit reporting or other personal consumer reports,9,inquiries,0.030991952164448028
+Credit reporting or other personal consumer reports,10,remove,0.028627042727808916
+Credit reporting or other personal consumer reports,11,section,0.02647686122398878
+Credit reporting or other personal consumer reports,12,fcra,0.024370329236424834
+Credit reporting or other personal consumer reports,13,agency,0.02398370774642171
+Credit reporting or other personal consumer reports,14,items,0.023426883883423063
+Credit reporting or other personal consumer reports,15,identity,0.02284315633109656
+Debt collection,1,debt,0.09903867060197871
+Debt collection,2,collection,0.050720866657403905
+Debt collection,3,credit,0.04359643682612525
+Debt collection,4,company,0.039092136131360825
+Debt collection,5,account,0.03818097512007902
+Debt collection,6,report,0.032792338310894446
+Debt collection,7,information,0.028406567488501403
+Debt collection,8,received,0.0249237454218132
+Debt collection,9,collect,0.02320407391194835
+Debt collection,10,owe,0.023054018521559205
+Debt collection,11,sent,0.021267209180282957
+Debt collection,12,collector,0.02095031825041334
+Debt collection,13,letter,0.02073138848266896
+Debt collection,14,original,0.02015461743150407
+Debt collection,15,validation,0.01993227835360176
+Debt or credit management,1,debt,0.05168334165942704
+Debt or credit management,2,company,0.04441145683989955
+Debt or credit management,3,credit,0.04216709656687714
+Debt or credit management,4,account,0.032601501940532476
+Debt or credit management,5,paid,0.03117616845435185
+Debt or credit management,6,payment,0.027492385859558113
+Debt or credit management,7,payments,0.025463527861295892
+Debt or credit management,8,settlement,0.02368728435024967
+Debt or credit management,9,money,0.023290123217811057
+Debt or credit management,10,called,0.02271807061276823
+Debt or credit management,11,did,0.022328695762063196
+Debt or credit management,12,told,0.02054601069748478
+Debt or credit management,13,paying,0.02001771021952323
+Debt or credit management,14,services,0.019887591758082915
+Debt or credit management,15,time,0.01969010333335626
+"Money transfer, virtual currency, or money service",1,money,0.07458818508151699
+"Money transfer, virtual currency, or money service",2,account,0.05845965170072529
+"Money transfer, virtual currency, or money service",3,bank,0.04935621127054212
+"Money transfer, virtual currency, or money service",4,transfer,0.04421115030321965
+"Money transfer, virtual currency, or money service",5,funds,0.04409145628798421
+"Money transfer, virtual currency, or money service",6,paypal,0.03888723103631055
+"Money transfer, virtual currency, or money service",7,transaction,0.03212041114108964
+"Money transfer, virtual currency, or money service",8,sent,0.0294259853200395
+"Money transfer, virtual currency, or money service",9,app,0.02711740650920867
+"Money transfer, virtual currency, or money service",10,venmo,0.02703574110630898
+"Money transfer, virtual currency, or money service",11,email,0.02672985848460545
+"Money transfer, virtual currency, or money service",12,told,0.026709503067169574
+"Money transfer, virtual currency, or money service",13,received,0.024669137325791537
+"Money transfer, virtual currency, or money service",14,did,0.024303391839568228
+"Money transfer, virtual currency, or money service",15,said,0.023547396476385693
+Mortgage,1,mortgage,0.10568934662907968
+Mortgage,2,loan,0.06190977160182847
+Mortgage,3,payment,0.0490411662318692
+Mortgage,4,escrow,0.04197596571162716
+Mortgage,5,home,0.03696480649682417
+Mortgage,6,insurance,0.03292761690372752
+Mortgage,7,payments,0.03277612356017538
+Mortgage,8,property,0.03073537851197493
+Mortgage,9,company,0.02902387143958532
+Mortgage,10,told,0.02733113799095006
+Mortgage,11,received,0.026853075570557997
+Mortgage,12,pay,0.02670400046216097
+Mortgage,13,year,0.026593974581202818
+Mortgage,14,paid,0.024929724638004674
+Mortgage,15,sent,0.024618529982903183
+"Payday loan, title loan, personal loan, or advance loan",1,loan,0.10240969576760879
+"Payday loan, title loan, personal loan, or advance loan",2,payment,0.040133966195145476
+"Payday loan, title loan, personal loan, or advance loan",3,payments,0.03432609174732748
+"Payday loan, title loan, personal loan, or advance loan",4,company,0.03432041294736529
+"Payday loan, title loan, personal loan, or advance loan",5,paid,0.03254096623395749
+"Payday loan, title loan, personal loan, or advance loan",6,pay,0.032489848874465696
+"Payday loan, title loan, personal loan, or advance loan",7,account,0.031219278921253365
+"Payday loan, title loan, personal loan, or advance loan",8,told,0.028234845480373482
+"Payday loan, title loan, personal loan, or advance loan",9,bank,0.022747501098906112
+"Payday loan, title loan, personal loan, or advance loan",10,credit,0.022482636227830324
+"Payday loan, title loan, personal loan, or advance loan",11,money,0.022309053330035137
+"Payday loan, title loan, personal loan, or advance loan",12,received,0.02146302607573681
+"Payday loan, title loan, personal loan, or advance loan",13,called,0.020429859998089855
+"Payday loan, title loan, personal loan, or advance loan",14,did,0.020342683835444082
+"Payday loan, title loan, personal loan, or advance loan",15,year,0.020075430302944702
+Prepaid card,1,card,0.12103006210978294
+Prepaid card,2,gift,0.09195745813199865
+Prepaid card,3,use,0.05425451910279418
+Prepaid card,4,money,0.0445306032313893
+Prepaid card,5,cards,0.043363593901981815
+Prepaid card,6,amex,0.04156871950695469
+Prepaid card,7,tried,0.040266384376544916
+Prepaid card,8,declined,0.03606007537619849
+Prepaid card,9,called,0.03237270964952049
+Prepaid card,10,prepaid,0.03229708597596928
+Prepaid card,11,received,0.029955701265177045
+Prepaid card,12,vanilla,0.029808653529951958
+Prepaid card,13,express,0.029754869821660684
+Prepaid card,14,told,0.029153949599196396
+Prepaid card,15,american,0.02809280015477107
+Student loan,1,loans,0.10158804630150017
+Student loan,2,loan,0.08011846686245366
+Student loan,3,student,0.07134169375252006
+Student loan,4,mohela,0.06890910661731238
+Student loan,5,navient,0.055120337636235
+Student loan,6,school,0.05237407228291645
+Student loan,7,payments,0.04318016767227855
+Student loan,8,payment,0.04314445418390726
+Student loan,9,forbearance,0.034264755075887346
+Student loan,10,application,0.03341717342743769
+Student loan,11,private,0.03323939807338721
+Student loan,12,discharge,0.032383279378177615
+Student loan,13,misconduct,0.028122895641300816
+Student loan,14,education,0.02684665166431126
+Student loan,15,federal,0.025593917004407704
+Vehicle loan or lease,1,car,0.07709159742240669
+Vehicle loan or lease,2,vehicle,0.07202346312484006
+Vehicle loan or lease,3,loan,0.05685068634873241
+Vehicle loan or lease,4,payment,0.04336635946264781
+Vehicle loan or lease,5,payments,0.031730702716709185
+Vehicle loan or lease,6,credit,0.029899856026143236
+Vehicle loan or lease,7,auto,0.029687747569031538
+Vehicle loan or lease,8,paid,0.028661449937199247
+Vehicle loan or lease,9,finance,0.026214441878671644
+Vehicle loan or lease,10,pay,0.02561783766434768
+Vehicle loan or lease,11,company,0.02525938318198536
+Vehicle loan or lease,12,account,0.025199408822842467
+Vehicle loan or lease,13,told,0.02469137314653217
+Vehicle loan or lease,14,financial,0.022689696486712093
+Vehicle loan or lease,15,dealership,0.021939788615219735
