@@ -1,0 +1,13 @@
+{
+  "n_rows_before_grouping": 276275,
+  "n_rows_after_grouping": 97655,
+  "exact_dup_rows_norm_text": 139710,
+  "exact_dup_rate_norm_text": 0.5056917925979549,
+  "redundant_rows_after_grouping": 178620,
+  "redundant_rate_after_grouping": 0.6465297258166681,
+  "near_dup_only_rows": 38910,
+  "rows_in_multi_row_groups": 209601,
+  "share_rows_in_multi_row_groups": 0.7586679938467107,
+  "largest_group": 7788,
+  "groups_with_label_conflict": 345
+}
