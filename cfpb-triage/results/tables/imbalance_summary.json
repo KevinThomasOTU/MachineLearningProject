@@ -1,0 +1,13 @@
+{
+  "n": 97655,
+  "n_classes": 11,
+  "majority_class": "Credit reporting or other personal consumer reports",
+  "majority_share": 0.5129486457426655,
+  "minority_class": "Debt or credit management",
+  "minority_share": 0.004618299114228662,
+  "imbalance_ratio": 111.06873614190687,
+  "entropy": 2.3616895437014866,
+  "normalized_entropy": 0.682681377766842,
+  "expected_macro_f1_stratified": 0.09090909090909091,
+  "expected_accuracy_stratified": 0.30505981758856204
+}
