@@ -1,4 +1,3 @@
-"""Class imbalance stats: ratio, entropy, per-class counts (Subangan)."""
 """Class imbalance stats: ratio, entropy, per-class counts (Subangan).
 
 Expected Macro F1 of a stratified-random predictor
