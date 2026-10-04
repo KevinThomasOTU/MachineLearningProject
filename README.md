@@ -152,4 +152,4 @@ that is **reviewed by someone other than its author**. Do not commit data files.
 - Four-month window; no data after July 2024, so no drift analysis is possible.
 - Some label noise: identical text filed under different products.
 - Edited template variants that are not grouped can still make validation/test slightly easier; this is measured
-  in the EDA and reported.
+in the EDA and reported.
