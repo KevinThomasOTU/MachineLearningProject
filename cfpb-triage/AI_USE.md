@@ -13,3 +13,5 @@
 | 2026-10-02 | Alex Facey | Claude Code | Running setup and scripts, pasting the split/compute code from the team doc, filling memo §7/§9 with the run results | `split.py`, `02_make_splits.py`, `06_compute_estimate.py`, memo §7/§9 text | The csv hash matched, split sizes and class shares matched the doc, pytest showed 12 passed like expected, compute estimate said no sampling needed |
 
 | 2026-10-02 | Sayon Kirubaharan | Claude Code | Create plots for evaluation method | 'plots.py', '03_eda.py' | pytest showed 12 passed as expected |
+
+| 2026-10-18 | Alex Facey | Claude Code | Pasting the M3 Phase A code from the team doc (baseline config block, NB + alpha sweep) and running the Phase A checks | `configs/config.yaml` baseline block, `tfidf.py`, `naive_bayes.py` | import check printed ok, pytest showed 12 passed, quick test confirmed |
