@@ -13,6 +13,8 @@
 | 2026-10-02 | Alex Facey | Claude Code | Running setup and scripts, pasting the split/compute code from the team doc, filling memo §7/§9 with the run results | `split.py`, `02_make_splits.py`, `06_compute_estimate.py`, memo §7/§9 text | The csv hash matched, split sizes and class shares matched the doc, pytest showed 12 passed like expected, compute estimate said no sampling needed |
 
 | 2026-10-02 | Sayon Kirubaharan | Claude Code | Create plots for evaluation method | 'plots.py', '03_eda.py' | pytest showed 12 passed as expected |
+
+| 2026-10-18 | Alex Facey | Claude Code | Pasting the M3 Phase A code from the team doc (baseline config block, NB + alpha sweep) and running the Phase A checks | `configs/config.yaml` baseline block, `tfidf.py`, `naive_bayes.py` | import check printed ok, pytest showed 12 passed, quick test confirmed |
  
  2026-10-02 | Subangan Sundaralingam | Claude Code | `src/cfpb_triage/analysis/imbalance.py`, `src/cfpb_triage/analysis/eda_stats.py`, `scripts/03_eda_stats.py`, `docs/SPLIT_STRATEGY.md`, `results/tables/eda_interpretations.md` (M2 EDA statistics) | Drafted the initial code for the class-imbalance summary, EDA statistics (top terms per class, chi-square split check, cross-split group leakage, residual near-duplicates) and the split-strategy doc template. Helped rewrite `duplicate_rates()` to compute before/after rates from `group_size` and the cleaning log after the data was collapsed to one row per group. |  All code reviewed before commit|
  
