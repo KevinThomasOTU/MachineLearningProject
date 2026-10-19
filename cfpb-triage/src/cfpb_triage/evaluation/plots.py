@@ -58,3 +58,31 @@ def plot_length_box(df: pd.DataFrame, path: str | Path) -> None:
     fig.tight_layout()
     fig.savefig(path, dpi=150)
     plt.close(fig)
+    
+def plot_confusion(cm: pd.DataFrame, path: str | Path,
+                   title: str = "Confusion matrix (row-normalised)") -> None:
+    """Heatmap of a confusion matrix normalised per true class.
+
+    Each row sums to 1, so the diagonal is per-class recall. Cells < 0.01 are
+    left blank to keep it readable.
+    """
+    norm = cm.div(cm.sum(axis=1).replace(0, 1), axis=0)
+    n = len(cm)
+    fig, ax = plt.subplots(figsize=(0.55 * n + 4.5, 0.45 * n + 3))
+    im = ax.imshow(norm.to_numpy(), cmap="Blues", vmin=0, vmax=1)
+    ax.set_xticks(range(n), [_short(c, 22) for c in cm.columns], rotation=60,
+                  ha="right", fontsize=8)
+    ax.set_yticks(range(n), [_short(c, 32) for c in cm.index], fontsize=8)
+    for i in range(n):
+        for j in range(n):
+            v = norm.iat[i, j]
+            if v >= 0.01:
+                ax.text(j, i, f"{v:.2f}", ha="center", va="center", fontsize=7,
+                        color="white" if v > 0.5 else "black")
+    ax.set_xlabel("Predicted product")
+    ax.set_ylabel("True product")
+    ax.set_title(title)
+    fig.colorbar(im, ax=ax, fraction=0.04, label="Share of true class")
+    fig.tight_layout()
+    fig.savefig(path, dpi=150)
+    plt.close(fig)
