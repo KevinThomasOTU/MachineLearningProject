@@ -19,3 +19,11 @@ tfidf:
   stop_words: [null, english]
   ngram_range: [[1, 1], [1, 2]]
   max_features: [1000, 5000, 10000]
+baseline:                   # M3: one fixed TF-IDF setting; the full grid is M5
+  seeds: [42, 43, 44]       # only Stratified Random is random; NB is deterministic
+  tfidf:
+    stop_words: null
+    ngram_range: [1, 2]
+    max_features: 10000
+    sublinear_tf: true
+  nb_alphas: [0.001, 0.01, 0.03, 0.1, 0.3, 1.0]
