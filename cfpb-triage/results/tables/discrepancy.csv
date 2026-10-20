@@ -1,0 +1,14 @@
+check,expected,observed,gap,note
+Stratified Random Macro F1,0.0909,0.0917,0.0008,E[F1_c] ~ 2 p_c q_c / (p_c + q_c) = 1/K when train and val mixes match (M2 memo quoted ~0.091)
+Stratified Random accuracy,0.305,0.3056,0.0006,E[acc] = sum_c p_c q_c; M2 memo quoted ~0.31
+Majority class Macro F1,0.0616,0.0616,-0.0,only 'Credit reporting or other...' gets non-zero F1
+Majority class accuracy,0.5129,0.5129,0.0,= share of the majority class in val
+NB from scratch vs sklearn: prediction agreement,1.0,1.0,0.0,same formulas -> should be identical
+NB predictions match 04_run_baseline output,1.0,1.0,0.0,rerun is deterministic
+TF-IDF fit+transform time (s),19.849,16.733,-3.116,M2 extrapolated from a 10k-row subsample
+NB fit time (s),1.297,0.1699,-1.1271,M2 extrapolated from a 10k-row subsample
+NB train - val Macro F1 (tuned alpha),,0.0812,,generalisation gap
+NB tuned - default alpha Macro F1 (val),,0.1071,,gain from tuning alpha on val (optimistic until test in M5)
+Share of val with a train near-copy (cos >= 0.8),0.22,0.2288,0.0088,"M2 estimate came from a 2,000-row val+test sample"
+NB Macro F1: near-copy rows - other rows,,0.0305,,how much easy template-like rows inflate the score
+NB Macro F1 weighted by group_size,0.6234,0.5873,-0.0362,expected = unweighted score; gap = effect of collapsing templates
