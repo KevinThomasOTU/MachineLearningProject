@@ -97,11 +97,36 @@ Without `make` (e.g. Windows), run in order:
 
 Modelling milestones add:
 
-    python scripts/04_run_baseline.py    # baseline and the three models
-    python scripts/05_run_ablations.py   # TF-IDF ablation grid over seeds
+    python scripts/04_run_baseline.py    # M3: naive benchmarks + Multinomial NB baseline (validation split)
+    python scripts/07_discrepancy.py     # M3: expected-vs-observed analysis and significance tests
+    python scripts/08_check_reproducible.py  # M3: re-runs 04 and checks the metrics are identical
+    python scripts/05_run_ablations.py   # M5: TF-IDF ablation grid over seeds
 
 Cleaning takes about 95 s, the split about 1 min. All settings (seed, `min_class_count`, `sample_size`,
 `one_row_per_group`, dedupe thresholds, split ratios, TF-IDF grid) are in [configs/config.yaml](configs/config.yaml).
+
+## Reproducing the M3 baseline
+
+Release `v0.3-m3`. Tested on Python 3.14.5, Windows 11, CPU only. Package versions are pinned in
+`requirements.txt`. With the splits from `02_make_splits.py` in place (see above):
+
+    pip install -r requirements.txt && pip install -e .
+    make m3          # pytest, 04_run_baseline, 07_discrepancy, 08_check_reproducible
+
+Without `make`, run `pytest -q`, then `scripts/04_run_baseline.py`, `scripts/07_discrepancy.py` and
+`scripts/08_check_reproducible.py` in that order (about 2.5 minutes in total). Expected: 23 tests pass, tuned
+Multinomial NB scores Macro F1 0.623 on validation, and the last script prints `PASS`.
+
+| Output | File |
+|---|---|
+| Baseline table | `results/tables/baseline_table.csv` (per-seed rows in `baseline_runs.csv`) |
+| NB alpha sweep, per-class scores | `results/tables/nb_alpha_sweep.csv`, `per_class_nb.csv` |
+| Discrepancy analysis | `results/tables/discrepancy.csv`, `significance.csv`, `nb_by_nearcopy.csv` |
+| Confusion matrix | `results/figures/confusion_nb_val.png` |
+| Run and environment logs | `results/logs/baseline_run.json`, `repro_check.json` |
+
+All M3 scores are on the **validation** split. The test split is not used until M5. The memo is
+[docs/M3_TECHNICAL_MEMO.md](docs/M3_TECHNICAL_MEMO.md).
 
 ## Repository layout
 
@@ -127,8 +152,9 @@ Cleaning takes about 95 s, the split about 1 min. All settings (seed, `min_class
 | Milestone | Content | Status |
 |---|---|---|
 | Proposal | Problem, data, methods | Done (`reports/proposal`) |
-| M2 | Data card, cleaning, group-aware splits, EDA, leakage tests, compute plan, approval memo | In progress |
-| Modelling | Baseline, NB, LR, k-NN, TF-IDF ablations, significance tests | Planned (stubs in `src/`) |
+| M2 | Data card, cleaning, group-aware splits, EDA, leakage tests, compute plan, approval memo | Done |
+| M3 | Pipeline, naive benchmarks, Multinomial NB baseline, baseline table, discrepancy analysis, start/stop/continue | Done (`v0.3-m3`) |
+| Modelling | L2 Logistic Regression, k-NN, TF-IDF ablations over seeds | Planned (stubs in `src/`) |
 | Progress / Final reports | Results, interpretation, contributions | Planned |
 
 ## Documentation
@@ -136,7 +162,9 @@ Cleaning takes about 95 s, the split about 1 min. All settings (seed, `min_class
 - [docs/DATA_CARD.md](docs/DATA_CARD.md) — source, license, fields, cleaning steps with row counts, biases, PII
 - [docs/SPLIT_STRATEGY.md](docs/SPLIT_STRATEGY.md) — stratified group split, leakage rules, why Macro F1
 - [docs/M2_APPROVAL_MEMO.md](docs/M2_APPROVAL_MEMO.md) — Milestone 2 memo
-- [docs/PROPOSAL_UPDATES.md](docs/PROPOSAL_UPDATES.md) — changes since the proposal
+- [docs/M3_TECHNICAL_MEMO.md](docs/M3_TECHNICAL_MEMO.md) — Milestone 3 technical memo (baseline, discrepancy analysis, start/stop/continue)
+- [docs/M3_DISCREPANCY_SECTION.md](docs/M3_DISCREPANCY_SECTION.md) — full discrepancy write-up behind memo section 3
+- [docs/UPDATED_PROPOSAL.md](docs/UPDATED_PROPOSAL.md) — changes since the proposal
 - [AI_USE.md](AI_USE.md) — log of AI tool use
 - [CONTRIBUTIONS.md](CONTRIBUTIONS.md) — who did what
 
