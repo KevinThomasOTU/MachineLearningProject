@@ -1,0 +1,43 @@
+{
+  "run_utc": "2026-10-20T00:17:13+00:00",
+  "git_commit": "6e0a7b1",
+  "python": "3.13.14",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "versions": {
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "scikit-learn": "1.9.1"
+  },
+  "seed": 42,
+  "baseline_cfg": {
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "tfidf": {
+      "stop_words": null,
+      "ngram_range": [
+        1,
+        2
+      ],
+      "max_features": 10000,
+      "sublinear_tf": true
+    },
+    "nb_alphas": [
+      0.001,
+      0.01,
+      0.03,
+      0.1,
+      0.3,
+      1.0
+    ]
+  },
+  "n_train": 68357,
+  "n_val": 14649,
+  "n_classes": 11,
+  "vocab_size": 10000,
+  "best_alpha": 0.03,
+  "tfidf_fit_transform_s": 18.991,
+  "eval_split": "val (test sealed until M5)"
+}

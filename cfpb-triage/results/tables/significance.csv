@@ -1,0 +1,9 @@
+test,model,macro_f1,ci_low,ci_high,n_boot,diff,p_value,a_right_b_wrong,a_wrong_b_right,chi2
+bootstrap 95% CI,Majority class,0.0616,0.061,0.0623,1000.0,,,,,
+bootstrap 95% CI,Stratified Random,0.0937,0.0892,0.0984,1000.0,,,,,
+bootstrap 95% CI,NB default alpha,0.5163,0.5049,0.5281,1000.0,,,,,
+bootstrap 95% CI,NB tuned alpha,0.6234,0.609,0.6368,1000.0,,,,,
+paired bootstrap Macro F1 (A - B),pred_nb vs pred_stratified_s42,,0.5147,0.5442,1000.0,0.5297,0.002,,,
+McNemar (accuracy),pred_nb vs pred_stratified_s42,,,,,,0.0,7701.0,700.0,5832.639
+paired bootstrap Macro F1 (A - B),pred_nb vs pred_nb_default,,0.0944,0.12,1000.0,0.1071,0.002,,,
+McNemar (accuracy),pred_nb vs pred_nb_default,,,,,,0.0,387.0,116.0,144.9304

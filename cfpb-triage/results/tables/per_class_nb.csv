@@ -1,0 +1,12 @@
+product,precision,recall,f1,support
+Credit reporting or other personal consumer reports,0.9134,0.8574,0.8845,7513
+Debt collection,0.6782,0.7026,0.6902,1920
+Credit card,0.5939,0.7201,0.6509,1529
+Checking or savings account,0.6374,0.8938,0.7441,1440
+Mortgage,0.7478,0.8778,0.8076,581
+"Money transfer, virtual currency, or money service",0.8423,0.4048,0.5468,462
+Student loan,0.8974,0.8315,0.8632,368
+Vehicle loan or lease,0.6894,0.5771,0.6283,350
+"Payday loan, title loan, personal loan, or advance loan",0.6204,0.2792,0.3851,240
+Prepaid card,0.9186,0.4463,0.6008,177
+Debt or credit management,1.0,0.029,0.0563,69
