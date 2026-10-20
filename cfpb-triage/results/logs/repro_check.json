@@ -1,0 +1,19 @@
+{
+  "identical_metrics": true,
+  "max_abs_metric_diff": 0.0,
+  "python": "3.14.5",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "packages": {
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1",
+    "matplotlib": "3.11.2",
+    "pyyaml": "6.0.3"
+  },
+  "data_sha256_16": {
+    "train": "37c185734106e0e7",
+    "val": "7100276a4b281588",
+    "test": "4abe1018833c0bac"
+  }
+}
