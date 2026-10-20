@@ -100,6 +100,7 @@ Modelling milestones add:
     python scripts/04_run_baseline.py    # M3: naive benchmarks + Multinomial NB baseline (validation split)
     python scripts/07_discrepancy.py     # M3: expected-vs-observed analysis and significance tests
     python scripts/08_check_reproducible.py  # M3: re-runs 04 and checks the metrics are identical
+    python scripts/09_macro_precision_recall.py  # M3: macro precision/recall columns for the memo table
     python scripts/05_run_ablations.py   # M5: TF-IDF ablation grid over seeds
 
 Cleaning takes about 95 s, the split about 1 min. All settings (seed, `min_class_count`, `sample_size`,
@@ -119,7 +120,7 @@ Multinomial NB scores Macro F1 0.623 on validation, and the last script prints `
 
 | Output | File |
 |---|---|
-| Baseline table | `results/tables/baseline_table.csv` (per-seed rows in `baseline_runs.csv`) |
+| Baseline table | `results/tables/baseline_table.csv` (per-seed rows in `baseline_runs.csv`; macro precision/recall in `baseline_macro_pr.csv`) |
 | NB alpha sweep, per-class scores | `results/tables/nb_alpha_sweep.csv`, `per_class_nb.csv` |
 | Discrepancy analysis | `results/tables/discrepancy.csv`, `significance.csv`, `nb_by_nearcopy.csv` |
 | Confusion matrix | `results/figures/confusion_nb_val.png` |
