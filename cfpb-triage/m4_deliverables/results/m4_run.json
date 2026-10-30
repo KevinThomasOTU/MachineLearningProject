@@ -1,0 +1,19 @@
+{
+  "seed": 42,
+  "tfidf": {
+    "stop_words": null,
+    "ngram_range": [
+      1,
+      2
+    ],
+    "max_features": 10000,
+    "sublinear_tf": true
+  },
+  "best": {
+    "lr": "LR C=10 cw=none",
+    "lr_C": 10.0,
+    "lr_cw": "none",
+    "knn": "kNN cosine k=15"
+  },
+  "finished": "2026-10-29 19:26:10"
+}

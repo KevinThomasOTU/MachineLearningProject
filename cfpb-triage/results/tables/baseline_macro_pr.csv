@@ -1,0 +1,5 @@
+model,n_runs,accuracy,macro_precision,macro_recall,macro_f1
+Majority class,1,0.5129,0.0466,0.0909,0.0616
+Stratified Random,3,0.3056,0.0917,0.0918,0.0917
+"Multinomial NB (alpha=1, default)",1,0.7687,0.7284,0.5094,0.5163
+Multinomial NB (tuned alpha),1,0.7872,0.7763,0.6018,0.6234
