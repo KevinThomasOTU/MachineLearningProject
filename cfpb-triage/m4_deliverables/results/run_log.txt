@@ -1,0 +1,26 @@
+[m4] train=(68357, 10000) val=(14649, 10000) classes=11
+[nb] M3 baseline and fit_prior=False
+  NB alpha=0.03 (M3 baseline)              macroF1=0.6234 acc=0.7872 fit=0.2s pred=0.0s
+  NB alpha=0.03, fit_prior=False           macroF1=0.6035 acc=0.7403 fit=0.2s pred=0.0s
+[lr] L2 logistic regression: C sweep x class_weight
+  LR C=0.1 cw=none                         macroF1=0.5675 acc=0.8102 fit=10.9s pred=0.0s
+  LR C=1 cw=none                           macroF1=0.6812 acc=0.8435 fit=21.4s pred=0.0s
+  LR C=10 cw=none                          macroF1=0.6818 acc=0.8308 fit=36.2s pred=0.0s
+  LR C=100 cw=none                         macroF1=0.6557 acc=0.8017 fit=55.1s pred=0.0s
+  LR C=0.1 cw=balanced                     macroF1=0.6479 acc=0.7861 fit=7.3s pred=0.0s
+  LR C=1 cw=balanced                       macroF1=0.6719 acc=0.8081 fit=14.2s pred=0.0s
+  LR C=10 cw=balanced                      macroF1=0.6741 acc=0.8147 fit=30.1s pred=0.0s
+  LR C=100 cw=balanced                     macroF1=0.6552 acc=0.7985 fit=40.7s pred=0.0s
+[lr] best on val: LR C=10 cw=none (0.6818)
+[knn] cosine vs euclidean, k sweep (brute force on sparse TF-IDF)
+  kNN cosine k=1                           macroF1=0.5420 acc=0.7361 fit=0.1s pred=28.0s
+  kNN cosine k=5                           macroF1=0.5990 acc=0.7846 fit=0.1s pred=27.6s
+  kNN cosine k=15                          macroF1=0.6223 acc=0.8022 fit=0.1s pred=27.4s
+  kNN cosine k=31                          macroF1=0.6222 acc=0.8057 fit=0.1s pred=27.5s
+  kNN euclidean k=1                        macroF1=0.1472 acc=0.5378 fit=0.1s pred=25.0s
+  kNN euclidean k=5                        macroF1=0.1150 acc=0.5301 fit=0.1s pred=25.7s
+  kNN euclidean k=15                       macroF1=0.0986 acc=0.5267 fit=0.1s pred=26.8s
+  kNN euclidean k=31                       macroF1=0.4050 acc=0.6478 fit=0.1s pred=27.7s
+[knn] cosine vs euclidean prediction agreement: {1: 0.5925319134411905, 5: 0.5870025257696772, 15: 0.5850228684551847, 31: 0.7198443579766537}
+[curve] learning curve: NB vs best LR
+[m4] done -> C:\Users\kevin\Kevin Uni\MachineLearningProject\cfpb-triage\m4_deliverables\results

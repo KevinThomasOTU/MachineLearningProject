@@ -1,7 +1,7 @@
 {
-  "run_utc": "2026-10-20T00:17:13+00:00",
-  "git_commit": "6e0a7b1",
-  "python": "3.13.14",
+  "run_utc": "2026-10-20T03:39:36+00:00",
+  "git_commit": "25b6133",
+  "python": "3.14.5",
   "platform": "Windows-11-10.0.26200-SP0",
   "versions": {
     "numpy": "2.5.3",
@@ -38,6 +38,6 @@
   "n_classes": 11,
   "vocab_size": 10000,
   "best_alpha": 0.03,
-  "tfidf_fit_transform_s": 18.991,
+  "tfidf_fit_transform_s": 16.249,
   "eval_split": "val (test sealed until M5)"
 }
