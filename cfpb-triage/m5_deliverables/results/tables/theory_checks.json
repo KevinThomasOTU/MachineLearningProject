@@ -1,0 +1,10 @@
+{
+  "identity_max_abs_error_nonempty_pairs": 1.9984014443252818e-15,
+  "n_pairs_checked": 2000,
+  "train_rows_all_zero": 15,
+  "train_rows_all_zero_share": 0.00021943619526895562,
+  "val_rows_all_zero": 1,
+  "val_rows_all_zero_share": 6.82640453273261e-05,
+  "empty_row_distance_to_any_unit_vector": 1.0,
+  "nb_class_prior_vs_frequency_max_abs_diff": 3.3306690738754696e-16
+}
