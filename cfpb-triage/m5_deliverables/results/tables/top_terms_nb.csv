@@ -1,0 +1,111 @@
+product,rank,term,score
+Checking or savings account,1,cd,4.957039675367689
+Checking or savings account,2,marcus,4.949096846192652
+Checking or savings account,3,juno,4.875708303132418
+Checking or savings account,4,00 bonus,4.771905375293237
+Checking or savings account,5,chime,4.681169859299621
+Checking or savings account,6,opened checking,4.33599683462297
+Checking or savings account,7,check deposit,4.311259734039297
+Checking or savings account,8,robinhood,4.297670857955156
+Checking or savings account,9,access funds,4.234086222413156
+Checking or savings account,10,mobile deposit,4.208926656836008
+Credit card,1,1666b billing,6.234622480035292
+Credit card,2,remarks accounts,5.896153879991857
+Credit card,3,reports late,5.760011613976014
+Credit card,4,error corrections,5.707461456786718
+Credit card,5,payment remarks,5.6437467958300545
+Credit card,6,reasons reports,5.405252617977819
+Credit card,7,usc 1666b,5.110156450472929
+Credit card,8,ve consistently,4.849851634712178
+Credit card,9,accounts according,4.710933990991775
+Credit card,10,barclays,4.675342759795225
+Credit reporting or other personal consumer reports,1,609 611,5.012445397430626
+Credit reporting or other personal consumer reports,2,sections 609,4.97430153296365
+Credit reporting or other personal consumer reports,3,equifax,4.964718401870066
+Credit reporting or other personal consumer reports,4,fcra 605b,4.749867608313634
+Credit reporting or other personal consumer reports,5,unauthorized inquiries,4.718049388722937
+Credit reporting or other personal consumer reports,6,bureaus validate,4.575641285863291
+Credit reporting or other personal consumer reports,7,following inquiries,4.5629144827389645
+Credit reporting or other personal consumer reports,8,accounts violated,4.536091021998123
+Credit reporting or other personal consumer reports,9,list accounts,4.51108296970723
+Credit reporting or other personal consumer reports,10,confidentiality 15,4.496176434253422
+Debt collection,1,jefferson,5.1708666425054695
+Debt collection,2,portfolio recovery,5.111249885749098
+Debt collection,3,jefferson capital,5.094260908886442
+Debt collection,4,lvnv funding,5.01097208074342
+Debt collection,5,lvnv,4.880699862995989
+Debt collection,6,transworld,4.817158013629763
+Debt collection,7,collection account,4.804641776118656
+Debt collection,8,transworld systems,4.746369188946263
+Debt collection,9,recovery associates,4.743037776651202
+Debt collection,10,capital systems,4.65174701424111
+Debt or credit management,1,credit repair,5.028042845128885
+Debt or credit management,2,midland credit,4.7781126489360615
+Debt or credit management,3,credit management,4.525716937352227
+Debt or credit management,4,midland,4.283873372234698
+Debt or credit management,5,wakefield,4.159983942345388
+Debt or credit management,6,called equifax,4.117540795895529
+Debt or credit management,7,recertification,4.0710963542554275
+Debt or credit management,8,provide wet,4.030443210134148
+Debt or credit management,9,settle debt,3.9735488624674042
+Debt or credit management,10,year inquiry,3.9457923035962033
+"Money transfer, virtual currency, or money service",1,coinbase,6.408286100532768
+"Money transfer, virtual currency, or money service",2,venmo account,6.222450103778904
+"Money transfer, virtual currency, or money service",3,crypto,5.761588521846102
+"Money transfer, virtual currency, or money service",4,venmo,5.746541523298235
+"Money transfer, virtual currency, or money service",5,zelle,5.637833790069948
+"Money transfer, virtual currency, or money service",6,crypto com,5.443107289382594
+"Money transfer, virtual currency, or money service",7,robinhood,5.275150384661399
+"Money transfer, virtual currency, or money service",8,cash app,5.2277051765239015
+"Money transfer, virtual currency, or money service",9,cashapp,5.194588159607134
+"Money transfer, virtual currency, or money service",10,paypal account,4.896386343319618
+Mortgage,1,pmi,6.72562891753627
+Mortgage,2,newrez,6.013425320149022
+Mortgage,3,freedom mortgage,6.000303922635036
+Mortgage,4,escrow analysis,5.844891771554127
+Mortgage,5,roundpoint,5.819465740865001
+Mortgage,6,shellpoint,5.815848864896017
+Mortgage,7,mr cooper,5.775856943315526
+Mortgage,8,cooper,5.766692977843248
+Mortgage,9,flood insurance,5.673382172443657
+Mortgage,10,sps,5.667430377430654
+"Payday loan, title loan, personal loan, or advance loan",1,upstart,5.156314764889146
+"Payday loan, title loan, personal loan, or advance loan",2,installment loan,4.407641669878653
+"Payday loan, title loan, personal loan, or advance loan",3,payday,4.383095829263305
+"Payday loan, title loan, personal loan, or advance loan",4,onemain,4.328081690621027
+"Payday loan, title loan, personal loan, or advance loan",5,klarna,4.253584497420148
+"Payday loan, title loan, personal loan, or advance loan",6,affirm,4.169776292069081
+"Payday loan, title loan, personal loan, or advance loan",7,solar,3.883636409467864
+"Payday loan, title loan, personal loan, or advance loan",8,took loan,3.78798768179535
+"Payday loan, title loan, personal loan, or advance loan",9,paying loan,3.7569822969455684
+"Payday loan, title loan, personal loan, or advance loan",10,panels,3.7442279085428787
+Prepaid card,1,vanilla,7.14362635973314
+Prepaid card,2,gift card,6.9132370464143795
+Prepaid card,3,netspend,6.226941123711407
+Prepaid card,4,amex,6.1071430082705085
+Prepaid card,5,money network,5.892607132917523
+Prepaid card,6,gift,5.861743775551155
+Prepaid card,7,direct express,5.762057246938706
+Prepaid card,8,gift cards,5.70406054263127
+Prepaid card,9,tried use,5.312671207490287
+Prepaid card,10,prepaid,4.970965016035622
+Student loan,1,navient,7.616955651647507
+Student loan,2,mohela,7.60777572165053
+Student loan,3,school misconduct,7.413089957534078
+Student loan,4,private loans,7.024508462361622
+Student loan,5,administrative forbearance,6.740987267661828
+Student loan,6,misconduct discharge,6.648176646609821
+Student loan,7,pslf,6.616447630826491
+Student loan,8,federal loans,6.589529359262585
+Student loan,9,borrower defense,6.53563164554126
+Student loan,10,nelnet,6.49561573624044
+Vehicle loan or lease,1,credit acceptance,6.145262023913509
+Vehicle loan or lease,2,tesla,5.801825910233138
+Vehicle loan or lease,3,repossession,5.437493564991344
+Vehicle loan or lease,4,hyundai,5.419875092935332
+Vehicle loan or lease,5,repossessed,5.292968367116029
+Vehicle loan or lease,6,bridgecrest,5.273208056374349
+Vehicle loan or lease,7,nissan,5.2291218781156905
+Vehicle loan or lease,8,kia,5.192416994039572
+Vehicle loan or lease,9,carvana,5.152120787874787
+Vehicle loan or lease,10,dealership,5.073135850515297

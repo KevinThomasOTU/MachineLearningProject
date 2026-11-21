@@ -1,0 +1,82 @@
+product,pred,n,share_of_true_class
+Debt collection,Credit reporting or other personal consumer reports,421,0.21927083333333333
+Credit reporting or other personal consumer reports,Debt collection,259,0.03447357912950885
+Credit card,Credit reporting or other personal consumer reports,190,0.12426422498364945
+"Money transfer, virtual currency, or money service",Checking or savings account,133,0.2878787878787879
+Credit reporting or other personal consumer reports,Credit card,120,0.015972314654598696
+Vehicle loan or lease,Credit reporting or other personal consumer reports,78,0.22285714285714286
+Credit card,Checking or savings account,73,0.04774362328319163
+Checking or savings account,Credit card,63,0.04375
+Checking or savings account,"Money transfer, virtual currency, or money service",61,0.04236111111111111
+Credit card,Debt collection,50,0.032701111837802485
+Debt collection,Credit card,47,0.024479166666666666
+Prepaid card,Checking or savings account,44,0.24858757062146894
+"Payday loan, title loan, personal loan, or advance loan",Credit reporting or other personal consumer reports,42,0.175
+Checking or savings account,Credit reporting or other personal consumer reports,42,0.029166666666666667
+Mortgage,Credit reporting or other personal consumer reports,40,0.06884681583476764
+Student loan,Credit reporting or other personal consumer reports,33,0.08967391304347826
+Credit reporting or other personal consumer reports,Checking or savings account,31,0.00412618128577133
+Credit reporting or other personal consumer reports,Vehicle loan or lease,27,0.0035937707972847066
+"Payday loan, title loan, personal loan, or advance loan",Credit card,25,0.10416666666666667
+Vehicle loan or lease,Debt collection,24,0.06857142857142857
+Debt or credit management,Debt collection,22,0.3188405797101449
+Debt or credit management,Credit reporting or other personal consumer reports,21,0.30434782608695654
+"Payday loan, title loan, personal loan, or advance loan",Debt collection,21,0.0875
+"Money transfer, virtual currency, or money service",Credit card,16,0.03463203463203463
+Credit card,"Money transfer, virtual currency, or money service",15,0.009810333551340745
+Debt collection,Mortgage,14,0.007291666666666667
+Debt collection,"Payday loan, title loan, personal loan, or advance loan",14,0.007291666666666667
+Debt collection,Vehicle loan or lease,14,0.007291666666666667
+"Payday loan, title loan, personal loan, or advance loan",Vehicle loan or lease,14,0.058333333333333334
+Credit reporting or other personal consumer reports,Student loan,13,0.0017303340875815254
+Vehicle loan or lease,"Payday loan, title loan, personal loan, or advance loan",12,0.03428571428571429
+Prepaid card,"Money transfer, virtual currency, or money service",12,0.06779661016949153
+Mortgage,Checking or savings account,12,0.020654044750430294
+Credit reporting or other personal consumer reports,Mortgage,12,0.0015972314654598696
+Mortgage,Debt collection,11,0.0189328743545611
+Vehicle loan or lease,Checking or savings account,9,0.025714285714285714
+Prepaid card,Credit card,9,0.05084745762711865
+Checking or savings account,Mortgage,9,0.00625
+Checking or savings account,Debt collection,9,0.00625
+Credit card,"Payday loan, title loan, personal loan, or advance loan",8,0.005232177894048398
+Credit card,Prepaid card,8,0.005232177894048398
+Vehicle loan or lease,Credit card,8,0.022857142857142857
+Debt collection,Checking or savings account,8,0.004166666666666667
+Credit reporting or other personal consumer reports,"Payday loan, title loan, personal loan, or advance loan",8,0.0010648209769732464
+"Money transfer, virtual currency, or money service",Debt collection,8,0.017316017316017316
+"Payday loan, title loan, personal loan, or advance loan",Checking or savings account,8,0.03333333333333333
+Student loan,Credit card,7,0.019021739130434784
+Mortgage,Credit card,7,0.012048192771084338
+Vehicle loan or lease,Mortgage,7,0.02
+"Money transfer, virtual currency, or money service",Credit reporting or other personal consumer reports,7,0.015151515151515152
+Debt collection,"Money transfer, virtual currency, or money service",7,0.0036458333333333334
+Checking or savings account,Prepaid card,6,0.004166666666666667
+Checking or savings account,"Payday loan, title loan, personal loan, or advance loan",6,0.004166666666666667
+"Money transfer, virtual currency, or money service",Mortgage,6,0.012987012987012988
+Debt or credit management,Mortgage,6,0.08695652173913043
+Student loan,Checking or savings account,6,0.016304347826086956
+Debt or credit management,Checking or savings account,5,0.07246376811594203
+Student loan,Debt collection,5,0.01358695652173913
+Debt or credit management,Credit card,5,0.07246376811594203
+"Money transfer, virtual currency, or money service",Prepaid card,5,0.010822510822510822
+"Payday loan, title loan, personal loan, or advance loan",Mortgage,4,0.016666666666666666
+Prepaid card,Credit reporting or other personal consumer reports,4,0.022598870056497175
+Debt collection,Student loan,4,0.0020833333333333333
+"Payday loan, title loan, personal loan, or advance loan","Money transfer, virtual currency, or money service",4,0.016666666666666666
+Mortgage,"Payday loan, title loan, personal loan, or advance loan",4,0.0068846815834767644
+Student loan,"Payday loan, title loan, personal loan, or advance loan",3,0.008152173913043478
+Credit reporting or other personal consumer reports,"Money transfer, virtual currency, or money service",3,0.0003993078663649674
+Student loan,Vehicle loan or lease,2,0.005434782608695652
+Checking or savings account,Vehicle loan or lease,2,0.001388888888888889
+"Money transfer, virtual currency, or money service","Payday loan, title loan, personal loan, or advance loan",2,0.004329004329004329
+Credit reporting or other personal consumer reports,Debt or credit management,2,0.0002662052442433116
+Credit reporting or other personal consumer reports,Prepaid card,2,0.0002662052442433116
+Mortgage,Vehicle loan or lease,2,0.0034423407917383822
+Credit card,Vehicle loan or lease,1,0.0006540222367560497
+Debt or credit management,"Payday loan, title loan, personal loan, or advance loan",1,0.014492753623188406
+Debt or credit management,Student loan,1,0.014492753623188406
+Debt or credit management,Vehicle loan or lease,1,0.014492753623188406
+"Money transfer, virtual currency, or money service",Vehicle loan or lease,1,0.0021645021645021645
+Mortgage,"Money transfer, virtual currency, or money service",1,0.0017211703958691911
+"Payday loan, title loan, personal loan, or advance loan",Prepaid card,1,0.004166666666666667
+Prepaid card,"Payday loan, title loan, personal loan, or advance loan",1,0.005649717514124294
