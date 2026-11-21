@@ -1,0 +1,53 @@
+{
+  "nb": {
+    "tfidf": {
+      "stop_words": "english",
+      "ngram_range": [
+        1,
+        2
+      ],
+      "max_features": 10000,
+      "sublinear_tf": true
+    },
+    "params": {
+      "alpha": 0.03,
+      "fit_prior": true
+    },
+    "val_macro_f1": 0.647981186733345,
+    "n_configs_searched": 168
+  },
+  "lr": {
+    "tfidf": {
+      "stop_words": "english",
+      "ngram_range": [
+        1,
+        2
+      ],
+      "max_features": 10000,
+      "sublinear_tf": true
+    },
+    "params": {
+      "C": 3.0,
+      "class_weight": null
+    },
+    "val_macro_f1": 0.7124108249123187,
+    "n_configs_searched": 120
+  },
+  "knn": {
+    "tfidf": {
+      "stop_words": null,
+      "ngram_range": [
+        1,
+        1
+      ],
+      "max_features": 10000,
+      "sublinear_tf": true
+    },
+    "params": {
+      "k": 15,
+      "weights": "distance"
+    },
+    "val_macro_f1": 0.6650260788509235,
+    "n_configs_searched": 144
+  }
+}
