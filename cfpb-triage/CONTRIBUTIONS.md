@@ -31,7 +31,7 @@ Evidence: commits and pull requests in the repository, `AI_USE.md`, and the expe
 
 ## M5 note on who ran what
 
-For the Milestone 5 deadline, Kevin ran Sayon's and Subangan's remaining scripts with Claude Code on the real data
+For the Milestone 5 deadline, Kevin ran Sayon's and Subangan's remaining scripts on the real data
 (`m5_repeated_cv.py`, `m5_final_test.py`, `m5_main_table.py`, `m5_runlog.py --render`; `m5_significance.py`,
 `m5_ablation_effects.py`, `m5_interpretation.py`). The experiment log records these runs under Kevin's account.
 Sayon and Subangan wrote those scripts, review the outputs, and are responsible for explaining them.
